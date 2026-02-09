@@ -25,68 +25,66 @@ const SystemStatus = () => {
         </p>
       </div>
 
-      <DataPanel title="System Overview" className="mb-6">
+      <DataPanel title={t('systemStatus.systemOverview')} className="mb-6">
         <div className="system-tags">
           <div className="system-tag">
-            <span className="tag-label">Market reality</span>
-            <span className="tag-value">High-stakes, low-time decisions</span>
+            <span className="tag-label">{t('systemStatus.marketReality')}</span>
+            <span className="tag-value">{t('systemStatus.marketRealityValue')}</span>
           </div>
           <div className="system-tag">
-            <span className="tag-label">User state</span>
-            <span className="tag-value">Urgency, discretion, uncertainty</span>
+            <span className="tag-label">{t('systemStatus.userState')}</span>
+            <span className="tag-value">{t('systemStatus.userStateValue')}</span>
           </div>
           <div className="system-tag">
-            <span className="tag-label">Website role</span>
-            <span className="tag-value">Clarify → Reassure → Trigger action</span>
+            <span className="tag-label">{t('systemStatus.websiteRole')}</span>
+            <span className="tag-value">{t('systemStatus.websiteRoleValue')}</span>
           </div>
         </div>
       </DataPanel>
 
       <div className="kpi-grid">
         <KPIWidget
-          title="Total Business Failures 2025"
+          title={t('systemStatus.totalFailures')}
           value={latest.total.toLocaleString()}
-          source="Banque de France"
+          source={t('common.banqueDeFrance')}
           trend={parseFloat(trend)}
         />
         <KPIWidget
-          title="Direct Liquidations (LJ)"
+          title={t('systemStatus.directLiquidations')}
           value={latest.ljDirectes.toLocaleString()}
-          source="Banque de France"
+          source={t('common.banqueDeFrance')}
           trend={parseFloat((((latest.ljDirectes - previous.ljDirectes) / previous.ljDirectes) * 100).toFixed(1))}
         />
         <KPIWidget
-          title="Judicial Restructuring (RJ)"
+          title={t('systemStatus.judicialRestructuring')}
           value={latest.rjDirectes.toLocaleString()}
-          source="Banque de France"
+          source={t('common.banqueDeFrance')}
           trend={parseFloat((((latest.rjDirectes - previous.rjDirectes) / previous.rjDirectes) * 100).toFixed(1))}
         />
       </div>
 
       <DataPanel className="mt-6">
         <div className="info-block">
-          <Badge variant="warning">Contextual Indicator</Badge>
+          <Badge variant="warning">{t('systemStatus.contextualIndicator')}</Badge>
           <p className="info-text">
-            Judicial pressure indicators – contextual, not predictive. These metrics provide decision-makers 
-            with market reality context, not forecasting tools. Industrial failures represent a subset of total 
-            business failures, with regional and temporal variations requiring nuanced interpretation.
+            {t('systemStatus.indicatorText')}
           </p>
         </div>
       </DataPanel>
 
-      <DataPanel title="Decision Framework" className="mt-6">
+      <DataPanel title={t('systemStatus.decisionFramework')} className="mt-6">
         <div className="framework-grid">
           <div className="framework-item">
-            <h3 className="framework-title">Clarify</h3>
-            <p className="framework-desc">Reduce uncertainty through structured information presentation aligned with actual decision scenarios.</p>
+            <h3 className="framework-title">{t('systemStatus.clarify')}</h3>
+            <p className="framework-desc">{t('systemStatus.clarifyDesc')}</p>
           </div>
           <div className="framework-item">
-            <h3 className="framework-title">Reassure</h3>
-            <p className="framework-desc">Build trust through proof, process visibility, and credible operational signals—not marketing claims.</p>
+            <h3 className="framework-title">{t('systemStatus.reassure')}</h3>
+            <p className="framework-desc">{t('systemStatus.reassureDesc')}</p>
           </div>
           <div className="framework-item">
-            <h3 className="framework-title">Trigger Action</h3>
-            <p className="framework-desc">Enable decision with clear, context-appropriate entry points matching leader readiness and urgency.</p>
+            <h3 className="framework-title">{t('systemStatus.triggerAction')}</h3>
+            <p className="framework-desc">{t('systemStatus.triggerActionDesc')}</p>
           </div>
         </div>
       </DataPanel>
