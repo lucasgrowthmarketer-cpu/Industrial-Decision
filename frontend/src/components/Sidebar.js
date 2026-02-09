@@ -27,15 +27,15 @@ const Sidebar = () => {
   };
 
   return (
-    <nav className=\"sidebar\" data-testid=\"main-sidebar\">
-      <div className=\"sidebar-header\">
-        <h1 className=\"sidebar-title\">{t('sidebar.title').split(' ').map((word, i) => (
+    <nav className="sidebar" data-testid="main-sidebar">
+      <div className="sidebar-header">
+        <h1 className="sidebar-title">{t('sidebar.title').split(' ').map((word, i) => (
           <React.Fragment key={i}>{word}<br/></React.Fragment>
         ))}</h1>
-        <div className=\"system-version\">{t('sidebar.version')}</div>
+        <div className="system-version">{t('sidebar.version')}</div>
       </div>
       
-      <div className=\"sidebar-modules\">
+      <div className="sidebar-modules">
         {modules.map((module) => {
           const Icon = module.icon;
           return (
@@ -43,28 +43,28 @@ const Sidebar = () => {
               key={module.path}
               to={module.path}
               className={({ isActive }) => `sidebar-module ${isActive ? 'active' : ''}`}
-              data-testid={`nav-${module.label.toLowerCase().replace(/\\s+/g, '-')}`}
+              data-testid={`nav-${module.label.toLowerCase().replace(/\s+/g, '-')}`}
               end={module.path === '/'}
             >
-              <Icon size={18} className=\"module-icon\" />
-              <span className=\"module-label\">{module.label}</span>
+              <Icon size={18} className="module-icon" />
+              <span className="module-label">{module.label}</span>
             </NavLink>
           );
         })}
       </div>
 
-      <div className=\"sidebar-footer\">
+      <div className="sidebar-footer">
         <button 
-          className=\"language-toggle\" 
+          className="language-toggle" 
           onClick={toggleLanguage}
-          data-testid=\"language-toggle\"
+          data-testid="language-toggle"
         >
-          <Globe size={16} className=\"language-icon\" />
-          <span className=\"language-text\">{language.toUpperCase()}</span>
-          <span className=\"language-divider\">/</span>
-          <span className=\"language-text-inactive\">{language === 'en' ? 'FR' : 'EN'}</span>
+          <Globe size={16} className="language-icon" />
+          <span className="language-text">{language.toUpperCase()}</span>
+          <span className="language-divider">/</span>
+          <span className="language-text-inactive">{language === 'en' ? 'FR' : 'EN'}</span>
         </button>
-        <div className=\"language-note\">{t('sidebar.translationReady')}</div>
+        <div className="language-note">{t('sidebar.translationReady')}</div>
       </div>
     </nav>
   );
