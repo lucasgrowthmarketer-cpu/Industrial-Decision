@@ -323,7 +323,7 @@ body {
 
 /* Footer */
 .app-footer {
-  grid-column: 1 / 4;
+  grid-column: 2 / 4;
   grid-row: 2;
   background-color: var(--color-background-darker);
   border-top: 1px solid var(--color-border);
@@ -331,6 +331,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-left: 0;
 }
 
 .footer-operator {
