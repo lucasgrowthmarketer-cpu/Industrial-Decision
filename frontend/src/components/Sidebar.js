@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Activity, Database, Target, FileText, GitBranch, Shield, DoorOpen, BookOpen } from 'lucide-react';
+import { Activity, Database, Target, FileText, GitBranch, Shield, DoorOpen, BookOpen, Layers } from 'lucide-react';
 
 const Sidebar = () => {
   const modules = [
     { path: '/', label: 'System Status', icon: Activity },
+    { path: '/comex-overview', label: 'COMEX Overview', icon: Layers },
     { path: '/market-pressure', label: 'Market Pressure', icon: Database },
     { path: '/decision-readiness', label: 'Decision Readiness', icon: Target },
     { path: '/scenarios', label: 'Decision Scenarios', icon: FileText },
@@ -30,6 +31,7 @@ const Sidebar = () => {
               to={module.path}
               className={({ isActive }) => `sidebar-module ${isActive ? 'active' : ''}`}
               data-testid={`nav-${module.label.toLowerCase().replace(/\s+/g, '-')}`}
+              end={module.path === '/'}
             >
               <Icon size={18} className="module-icon" />
               <span className="module-label">{module.label}</span>
