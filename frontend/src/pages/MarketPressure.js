@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import DataPanel from '../components/DataPanel';
 import Badge from '../components/Badge';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { scaleLinear } from 'd3-scale';
 import { regionalData, calculateIPI, nationalTrendData } from '../data/industrial_pressure';
 
-// France GeoJSON topology URL
 const FRANCE_TOPO_JSON = 'https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/regions-version-simplifiee.geojson';
 
 const MarketPressure = () => {
+  const { t } = useTranslation();
   const [selectedYear, setSelectedYear] = useState(2025);
   const [dataSource, setDataSource] = useState('altares');
   const [geoData, setGeoData] = useState(null);
@@ -55,7 +56,6 @@ const MarketPressure = () => {
     setTooltipContent('');
   };
 
-  // National trend calculation
   const trendData = nationalTrendData.map((yearData) => ({
     year: yearData.year,
     value: yearData.total
@@ -71,14 +71,14 @@ const MarketPressure = () => {
   return (
     <div className="page-container" data-testid="market-pressure-page">
       <div className="page-header">
-        <h1 className="page-title">Market Pressure</h1>
-        <p className="page-subtitle">Data-driven context for industrial decision-making</p>
+        <h1 className="page-title">{t('marketPressure.title')}</h1>
+        <p className="page-subtitle">{t('marketPressure.subtitle')}</p>
       </div>
 
-      <DataPanel title="France - Industrial Failures by Region" className="mb-6">
+      <DataPanel title={t('marketPressure.franceTitle')} className="mb-6">
         <div className="map-controls">
           <div className="control-group">
-            <label className="control-label">Year</label>
+            <label className="control-label">{t('marketPressure.year')}</label>
             <input
               type="range"
               min="2021"
@@ -92,21 +92,21 @@ const MarketPressure = () => {
           </div>
           
           <div className="control-group">
-            <label className="control-label">Data Source</label>
+            <label className="control-label">{t('marketPressure.dataSource')}</label>
             <div className="toggle-group">
               <button
                 className={`toggle-button ${dataSource === 'altares' ? 'active' : ''}`}
                 onClick={() => setDataSource('altares')}
                 data-testid="source-altares-btn"
               >
-                Altares
+                {t('common.altares')}
               </button>
               <button
                 className={`toggle-button ${dataSource === 'banqueDeFrance' ? 'active' : ''}`}
                 onClick={() => setDataSource('banqueDeFrance')}
                 data-testid="source-bdf-btn"
               >
-                Banque de France
+                {t('common.banqueDeFrance')}
               </button>
             </div>
           </div>
@@ -148,7 +148,7 @@ const MarketPressure = () => {
               </Geographies>
             </ComposableMap>
           ) : (
-            <div className="map-loading">Loading map data...</div>
+            <div className="map-loading">{t('marketPressure.loadingMap')}</div>
           )}
         </div>
 
@@ -165,16 +165,16 @@ const MarketPressure = () => {
         )}
 
         <div className="info-block mt-4">
-          <Badge variant="info">Methodological Note</Badge>
+          <Badge variant="info">{t('marketPressure.methodologicalNote')}</Badge>
           <p className="info-text">
-            <strong>Altares:</strong> Comprehensive commercial database tracking all business failures including voluntary liquidations.<br />
-            <strong>Banque de France:</strong> Focuses on judicial procedures (RJ/LJ) with stricter reporting criteria.<br />
-            Differences in methodology explain variance between sources. Neither is "correct"—both provide complementary context.
+            <strong>{t('common.altares')}:</strong> {t('marketPressure.altaresDesc')}<br />
+            <strong>{t('common.banqueDeFrance')}:</strong> {t('marketPressure.bdfDesc')}<br />
+            {t('marketPressure.methodDiff')}
           </p>
         </div>
       </DataPanel>
 
-      <DataPanel title="Industrial Pressure Index (IPI)" className="mb-6">
+      <DataPanel title={t('marketPressure.ipiTitle')} className="mb-6">
         <div className="ipi-grid">
           {regionalData.slice(0, 6).map((region) => {
             const ipi = calculateIPI(region.region, selectedYear, dataSource);
@@ -190,15 +190,12 @@ const MarketPressure = () => {
           })}
         </div>
         <div className="info-block mt-4">
-          <Badge variant="warning">Composite Indicator</Badge>
-          <p className="info-text">
-            IPI (0-100) combines normalized failure volume, YoY variation, and industrial concentration. 
-            Avoids raw number misinterpretation by contextualizing pressure through multiple dimensions.
-          </p>
+          <Badge variant="warning">{t('marketPressure.compositeIndicator')}</Badge>
+          <p className="info-text">{t('marketPressure.ipiDesc')}</p>
         </div>
       </DataPanel>
 
-      <DataPanel title="National Trend (2021-2025)" className="mb-6">
+      <DataPanel title={t('marketPressure.nationalTrend')} className="mb-6">
         <div className="trend-chart">
           <div className="trend-bars">
             {trendData.map((item, index) => {
@@ -221,12 +218,8 @@ const MarketPressure = () => {
         </div>
       </DataPanel>
 
-      <DataPanel title="COMEX Reading">
-        <p className="reading-text">
-          Where pressure is mounting, decisions shorten. Industrial leaders in high-IPI regions face compressed 
-          evaluation windows, reduced exploration time, and heightened emphasis on trust signals. Decision-grade 
-          websites in these contexts must prioritize rapid clarity and credible reassurance over comprehensive exploration.
-        </p>
+      <DataPanel title={t('marketPressure.comexReading')}>
+        <p className="reading-text">{t('marketPressure.comexReadingText')}</p>
       </DataPanel>
     </div>
   );
