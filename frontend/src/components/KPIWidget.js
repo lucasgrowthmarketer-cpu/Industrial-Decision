@@ -1,12 +1,15 @@
 import React from 'react';
 
-const KPIWidget = ({ title, value, source, trend, className = "" }) => {
+const KPIWidget = ({ title, value, source, trend, className }) => {
+  const widgetClass = className ? `kpi-widget ${className}` : 'kpi-widget';
+  const trendClass = trend && trend > 0 ? 'kpi-trend positive' : 'kpi-trend negative';
+  
   return (
-    <div className={`kpi-widget ${className}`} data-testid="kpi-widget">
+    <div className={widgetClass} data-testid="kpi-widget">
       <div className="kpi-header">
         <span className="kpi-title">{title}</span>
-        {trend && (
-          <span className={`kpi-trend ${trend > 0 ? 'positive' : 'negative'}`}>
+        {trend !== undefined && trend !== null && (
+          <span className={trendClass}>
             {trend > 0 ? '+' : ''}{trend}%
           </span>
         )}
