@@ -1,10 +1,12 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import KPIWidget from '../components/KPIWidget';
 import DataPanel from '../components/DataPanel';
 import Badge from '../components/Badge';
 import { nationalTrendData } from '../data/industrial_pressure';
 
 const SystemStatus = () => {
+  const { t } = useTranslation();
   const latest = nationalTrendData[nationalTrendData.length - 1];
   const previous = nationalTrendData[nationalTrendData.length - 2];
   const trend = ((latest.total - previous.total) / previous.total * 100).toFixed(1);
@@ -13,13 +15,13 @@ const SystemStatus = () => {
     <div className="page-container" data-testid="system-status-page">
       <div className="hero-section">
         <h1 className="hero-title">
-          Industrial websites are not<br />marketing tools.<br />
-          <span className="hero-emphasis">They are decision systems.</span>
+          {t('systemStatus.title')}<br />
+          <span className="hero-emphasis">{t('systemStatus.subtitle')}</span>
         </h1>
         
         <p className="hero-subtitle">
-          In industry, leaders don't browse.<br />
-          They assess risk, timing, and credibility.
+          {t('systemStatus.heroSubtitle1')}<br />
+          {t('systemStatus.heroSubtitle2')}
         </p>
       </div>
 
