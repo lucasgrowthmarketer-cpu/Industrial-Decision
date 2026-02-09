@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import OperatorPanel from './components/OperatorPanel';
 import SystemStatus from './pages/SystemStatus';
+import COMEXOverview from './pages/COMEXOverview';
 import MarketPressure from './pages/MarketPressure';
 import DecisionReadiness from './pages/DecisionReadiness';
 import DecisionScenarios from './pages/DecisionScenarios';
@@ -21,6 +22,7 @@ function App() {
         <main className="main-canvas">
           <Routes>
             <Route path="/" element={<SystemStatus />} />
+            <Route path="/comex-overview" element={<COMEXOverview />} />
             <Route path="/market-pressure" element={<MarketPressure />} />
             <Route path="/decision-readiness" element={<DecisionReadiness />} />
             <Route path="/scenarios" element={<DecisionScenarios />} />
