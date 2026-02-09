@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import DataPanel from '../components/DataPanel';
 import Badge from '../components/Badge';
 import { processFlows } from '../data/process_flows';
 import { ChevronRight } from 'lucide-react';
 
 const ProcessVisibility = () => {
+  const { t } = useTranslation();
   const [selectedProcess, setSelectedProcess] = useState(processFlows[0]);
 
   return (
     <div className="page-container" data-testid="process-visibility-page">
       <div className="page-header">
-        <h1 className="page-title">Process Visibility</h1>
-        <p className="page-subtitle">Understanding operational pathways before engagement</p>
+        <h1 className="page-title">{t('processVisibility.title')}</h1>
+        <p className="page-subtitle">{t('processVisibility.subtitle')}</p>
       </div>
 
       <DataPanel className="mb-6">
@@ -48,7 +50,7 @@ const ProcessVisibility = () => {
 
             <div className="stage-content">
               <div className="stage-section">
-                <h4 className="stage-section-title">Inputs</h4>
+                <h4 className="stage-section-title">{t('processVisibility.inputs')}</h4>
                 <ul className="stage-list">
                   {stage.inputs.map((input, idx) => (
                     <li key={idx} className="stage-list-item">
@@ -60,7 +62,7 @@ const ProcessVisibility = () => {
               </div>
 
               <div className="stage-section">
-                <h4 className="stage-section-title">Outputs</h4>
+                <h4 className="stage-section-title">{t('processVisibility.outputs')}</h4>
                 <ul className="stage-list">
                   {stage.outputs.map((output, idx) => (
                     <li key={idx} className="stage-list-item">
@@ -72,7 +74,7 @@ const ProcessVisibility = () => {
               </div>
 
               <div className="stage-section">
-                <h4 className="stage-section-title">Commitments</h4>
+                <h4 className="stage-section-title">{t('processVisibility.commitments')}</h4>
                 <ul className="stage-list">
                   {stage.commitments.map((commitment, idx) => (
                     <li key={idx} className="stage-list-item commitment">
@@ -84,7 +86,7 @@ const ProcessVisibility = () => {
               </div>
 
               <div className="stage-section">
-                <h4 className="stage-section-title">Risks</h4>
+                <h4 className="stage-section-title">{t('processVisibility.risks')}</h4>
                 <ul className="stage-list">
                   {stage.risks.map((risk, idx) => (
                     <li key={idx} className="stage-list-item risk">
@@ -103,26 +105,21 @@ const ProcessVisibility = () => {
         ))}
       </div>
 
-      <DataPanel title="Decision Gates Applicability" className="mt-6">
+      <DataPanel title={t('processVisibility.decisionGatesApplicability')} className="mt-6">
         <div className="gates-applicability">
           {selectedProcess.decisionGates.map((gate) => (
             <div key={gate.gate} className="gate-item">
               <Badge variant="success">{gate.gate}</Badge>
               <span className="gate-stages">
-                Applicable to: {gate.applicableStages.map(s => s.replace('stage', 'Stage ')).join(', ')}
+                {t('processVisibility.applicableTo')}: {gate.applicableStages.map(s => s.replace('stage', 'Stage ')).join(', ')}
               </span>
             </div>
           ))}
         </div>
       </DataPanel>
 
-      <DataPanel title="Process Transparency Note">
-        <p className="reading-text">
-          These process maps provide understanding-level visibility, not operational instruction. Leaders use this 
-          information to assess feasibility, timeline fit, and risk before engagement. This reduces uncertainty and 
-          enables confident decision initiation. Process opacity, by contrast, forces exploratory contact—adding friction 
-          and delaying decisions.
-        </p>
+      <DataPanel title={t('processVisibility.processTransparency')}>
+        <p className="reading-text">{t('processVisibility.transparencyText')}</p>
       </DataPanel>
     </div>
   );

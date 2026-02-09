@@ -1,21 +1,21 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import DataPanel from '../components/DataPanel';
 import { decisionScenarios } from '../data/scenarios';
 import { AlertCircle, CheckCircle, XCircle } from 'lucide-react';
 
 const DecisionScenarios = () => {
+  const { t } = useTranslation();
+  
   return (
     <div className="page-container" data-testid="decision-scenarios-page">
       <div className="page-header">
-        <h1 className="page-title">Decision Scenarios</h1>
-        <p className="page-subtitle">Real situations industrial leaders face</p>
+        <h1 className="page-title">{t('decisionScenarios.title')}</h1>
+        <p className="page-subtitle">{t('decisionScenarios.subtitle')}</p>
       </div>
 
       <DataPanel className="mb-6">
-        <p className="intro-text">
-          Industrial decision-makers operate in specific, often urgent contexts. Understanding these scenarios 
-          is essential for architecting websites that function as decision support systems rather than marketing catalogs.
-        </p>
+        <p className="intro-text">{t('decisionScenarios.intro')}</p>
       </DataPanel>
 
       {decisionScenarios.map((scenario) => (
@@ -24,7 +24,7 @@ const DecisionScenarios = () => {
             <div className="scenario-section">
               <div className="scenario-section-header">
                 <CheckCircle size={20} className="section-icon success" />
-                <h3 className="scenario-section-title">What Leaders Need</h3>
+                <h3 className="scenario-section-title">{t('decisionScenarios.whatLeadersNeed')}</h3>
               </div>
               <ul className="scenario-list">
                 {scenario.leaderNeeds.map((need, index) => (
@@ -36,7 +36,7 @@ const DecisionScenarios = () => {
             <div className="scenario-section">
               <div className="scenario-section-header">
                 <XCircle size={20} className="section-icon error" />
-                <h3 className="scenario-section-title">Typical Website Failures</h3>
+                <h3 className="scenario-section-title">{t('decisionScenarios.typicalFailures')}</h3>
               </div>
               <ul className="scenario-list">
                 {scenario.typicalFailures.map((failure, index) => (
@@ -48,7 +48,7 @@ const DecisionScenarios = () => {
             <div className="scenario-section">
               <div className="scenario-section-header">
                 <AlertCircle size={20} className="section-icon warning" />
-                <h3 className="scenario-section-title">Decision Blockers</h3>
+                <h3 className="scenario-section-title">{t('decisionScenarios.decisionBlockers')}</h3>
               </div>
               <ul className="scenario-list">
                 {scenario.decisionBlockers.map((blocker, index) => (
@@ -60,13 +60,8 @@ const DecisionScenarios = () => {
         </DataPanel>
       ))}
 
-      <DataPanel title="Analytical Observation">
-        <p className="reading-text">
-          These scenarios share common threads: urgency, discretion, risk assessment, and trust requirements. 
-          Decision-grade websites address these dimensions systematically, while catalog-oriented sites leave 
-          leaders to extract information through supplementary channels—adding friction, time, and uncertainty to 
-          already complex decision processes.
-        </p>
+      <DataPanel title={t('decisionScenarios.analyticalObservation')}>
+        <p className="reading-text">{t('decisionScenarios.observationText')}</p>
       </DataPanel>
     </div>
   );
