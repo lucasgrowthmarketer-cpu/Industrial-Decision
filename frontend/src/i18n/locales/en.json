@@ -1,0 +1,35 @@
+{
+  "sidebar": {
+    "title": "Industrial Decision Interface",
+    "version": "v2.1.0",
+    "systemStatus": "System Status",
+    "comexOverview": "COMEX Overview",
+    "marketPressure": "Market Pressure",
+    "decisionReadiness": "Decision Readiness",
+    "decisionScenarios": "Decision Scenarios",
+    "processVisibility": "Process Visibility",
+    "proofBlocks": "Proof Blocks",
+    "decisionGates": "Decision Gates",
+    "sourcesMethod": "Sources & Method",
+    "translationReady": "Translation ready"
+  },
+  "operator": {
+    "label": "Operator / Analyst",
+    "name": "Lucas Ansel",
+    "title": "Digital Strategy & Industrial Web Architecture",
+    "email": "lucas.growthmarketer@gmail.com",
+    "linkedin": "LinkedIn Profile"
+  },
+  "footer": {
+    "operatorTitle": "Operator / Analyst",
+    "operatorName": "Lucas Ansel",
+    "operatorSubtitle": "Digital Strategy & Industrial Web Architecture",
+    "note": "A good industrial website does not sell. It reduces uncertainty."
+  },
+  "systemStatus": {
+    "title": "Industrial websites are not marketing tools.",
+    "subtitle": "They are decision systems.",
+    "heroSubtitle1": "In industry, leaders don't browse.",
+    "heroSubtitle2": "They assess risk, timing, and credibility."
+  }
+}

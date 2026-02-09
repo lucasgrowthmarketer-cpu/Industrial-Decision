@@ -1,0 +1,35 @@
+{
+  "sidebar": {
+    "title": "Interface de Décision Industrielle",
+    "version": "v2.1.0",
+    "systemStatus": "État du Système",
+    "comexOverview": "Vue d'ensemble COMEX",
+    "marketPressure": "Pression du Marché",
+    "decisionReadiness": "Maturité Décisionnelle",
+    "decisionScenarios": "Scénarios de Décision",
+    "processVisibility": "Visibilité des Processus",
+    "proofBlocks": "Blocs de Preuve",
+    "decisionGates": "Portes de Décision",
+    "sourcesMethod": "Sources & Méthode",
+    "translationReady": "Traduction prête"
+  },
+  "operator": {
+    "label": "Opérateur / Analyste",
+    "name": "Lucas Ansel",
+    "title": "Stratégie Digitale & Architecture Web Industrielle",
+    "email": "lucas.growthmarketer@gmail.com",
+    "linkedin": "Profil LinkedIn"
+  },
+  "footer": {
+    "operatorTitle": "Opérateur / Analyste",
+    "operatorName": "Lucas Ansel",
+    "operatorSubtitle": "Stratégie Digitale & Architecture Web Industrielle",
+    "note": "Un bon site industriel ne vend pas. Il réduit l'incertitude."
+  },
+  "systemStatus": {
+    "title": "Les sites industriels ne sont pas des outils marketing.",
+    "subtitle": "Ce sont des systèmes de décision.",
+    "heroSubtitle1": "Dans l'industrie, les dirigeants ne naviguent pas.",
+    "heroSubtitle2": "Ils évaluent les risques, le timing et la crédibilité."
+  }
+}
