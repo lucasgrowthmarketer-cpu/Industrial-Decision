@@ -1,9 +1,11 @@
 import React from 'react';
 import { Mail, Phone } from 'lucide-react';
 
-const OperatorPanel = ({ className = "" }) => {
+const OperatorPanel = ({ className }) => {
+  const panelClass = className ? `operator-panel ${className}` : 'operator-panel';
+  
   return (
-    <div className={`operator-panel ${className}`}>
+    <div className={panelClass}>
       <div className="operator-header">
         <div className="status-indicator"></div>
         <span className="operator-label">Operator / Analyst</span>
