@@ -1,24 +1,26 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Mail, Phone, Linkedin } from 'lucide-react';
 
 const OperatorPanel = ({ className }) => {
+  const { t } = useTranslation();
   const panelClass = className ? `operator-panel ${className}` : 'operator-panel';
   
   return (
     <div className={panelClass}>
       <div className="operator-header">
         <div className="status-indicator"></div>
-        <span className="operator-label">Operator / Analyst</span>
+        <span className="operator-label">{t('operator.label')}</span>
       </div>
       
       <div className="operator-content">
-        <h3 className="operator-name">Lucas Ansel</h3>
-        <p className="operator-title">Digital Strategy & Industrial Web Architecture</p>
+        <h3 className="operator-name">{t('operator.name')}</h3>
+        <p className="operator-title">{t('operator.title')}</p>
         
         <div className="operator-contact">
           <a href="mailto:lucas.growthmarketer@gmail.com" className="contact-item" data-testid="operator-email-link">
             <Mail size={16} />
-            <span>lucas.growthmarketer@gmail.com</span>
+            <span>{t('operator.email')}</span>
           </a>
           <a href="https://wa.me/33611752581" className="contact-item" data-testid="operator-whatsapp-link" target="_blank" rel="noopener noreferrer">
             <Phone size={16} />
@@ -26,7 +28,7 @@ const OperatorPanel = ({ className }) => {
           </a>
           <a href="https://www.linkedin.com/in/lucas-ansel-growth-hacker/" className="contact-item" data-testid="operator-linkedin-link" target="_blank" rel="noopener noreferrer">
             <Linkedin size={16} />
-            <span>LinkedIn Profile</span>
+            <span>{t('operator.linkedin')}</span>
           </a>
         </div>
       </div>
