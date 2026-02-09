@@ -1,8 +1,10 @@
 import React from 'react';
 
-const DataPanel = ({ title, subtitle, children, className = "" }) => {
+const DataPanel = ({ title, subtitle, children, className }) => {
+  const panelClass = className ? `data-panel ${className}` : 'data-panel';
+  
   return (
-    <div className={`data-panel ${className}`} data-testid="data-panel">
+    <div className={panelClass} data-testid="data-panel">
       {(title || subtitle) && (
         <div className="data-panel-header">
           {title && <h2 className="data-panel-title">{title}</h2>}
