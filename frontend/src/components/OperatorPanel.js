@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Phone, Linkedin } from 'lucide-react';
 
 const OperatorPanel = ({ className }) => {
   const panelClass = className ? `operator-panel ${className}` : 'operator-panel';
@@ -22,7 +22,11 @@ const OperatorPanel = ({ className }) => {
           </a>
           <a href="https://wa.me/33611752581" className="contact-item" data-testid="operator-whatsapp-link" target="_blank" rel="noopener noreferrer">
             <Phone size={16} />
-            <span>WhatsApp: +33 6 11 75 25 81</span>
+            <span>+33 6 11 75 25 81</span>
+          </a>
+          <a href="https://www.linkedin.com/in/lucas-ansel-growth-hacker/" className="contact-item" data-testid="operator-linkedin-link" target="_blank" rel="noopener noreferrer">
+            <Linkedin size={16} />
+            <span>LinkedIn Profile</span>
           </a>
         </div>
       </div>
