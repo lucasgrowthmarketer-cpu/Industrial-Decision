@@ -1,34 +1,41 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Activity, Database, Target, FileText, GitBranch, Shield, DoorOpen, BookOpen, Layers, Globe } from 'lucide-react';
 
 const Sidebar = () => {
-  const [language, setLanguage] = useState('EN');
+  const { t, i18n } = useTranslation();
+  const [language, setLanguage] = useState(i18n.language);
 
   const modules = [
-    { path: '/', label: 'System Status', icon: Activity },
-    { path: '/comex-overview', label: 'COMEX Overview', icon: Layers },
-    { path: '/market-pressure', label: 'Market Pressure', icon: Database },
-    { path: '/decision-readiness', label: 'Decision Readiness', icon: Target },
-    { path: '/scenarios', label: 'Decision Scenarios', icon: FileText },
-    { path: '/process', label: 'Process Visibility', icon: GitBranch },
-    { path: '/proof', label: 'Proof Blocks', icon: Shield },
-    { path: '/gates', label: 'Decision Gates', icon: DoorOpen },
-    { path: '/sources', label: 'Sources & Method', icon: BookOpen }
+    { path: '/', label: t('sidebar.systemStatus'), icon: Activity },
+    { path: '/comex-overview', label: t('sidebar.comexOverview'), icon: Layers },
+    { path: '/market-pressure', label: t('sidebar.marketPressure'), icon: Database },
+    { path: '/decision-readiness', label: t('sidebar.decisionReadiness'), icon: Target },
+    { path: '/scenarios', label: t('sidebar.decisionScenarios'), icon: FileText },
+    { path: '/process', label: t('sidebar.processVisibility'), icon: GitBranch },
+    { path: '/proof', label: t('sidebar.proofBlocks'), icon: Shield },
+    { path: '/gates', label: t('sidebar.decisionGates'), icon: DoorOpen },
+    { path: '/sources', label: t('sidebar.sourcesMethod'), icon: BookOpen }
   ];
 
   const toggleLanguage = () => {
-    setLanguage(language === 'EN' ? 'FR' : 'EN');
+    const newLang = language === 'en' ? 'fr' : 'en';
+    setLanguage(newLang);
+    i18n.changeLanguage(newLang);
+    localStorage.setItem('language', newLang);
   };
 
   return (
-    <nav className="sidebar" data-testid="main-sidebar">
-      <div className="sidebar-header">
-        <h1 className="sidebar-title">Industrial<br/>Decision<br/>Interface</h1>
-        <div className="system-version">v2.1.0</div>
+    <nav className=\"sidebar\" data-testid=\"main-sidebar\">
+      <div className=\"sidebar-header\">
+        <h1 className=\"sidebar-title\">{t('sidebar.title').split(' ').map((word, i) => (
+          <React.Fragment key={i}>{word}<br/></React.Fragment>
+        ))}</h1>
+        <div className=\"system-version\">{t('sidebar.version')}</div>
       </div>
       
-      <div className="sidebar-modules">
+      <div className=\"sidebar-modules\">
         {modules.map((module) => {
           const Icon = module.icon;
           return (
@@ -36,28 +43,28 @@ const Sidebar = () => {
               key={module.path}
               to={module.path}
               className={({ isActive }) => `sidebar-module ${isActive ? 'active' : ''}`}
-              data-testid={`nav-${module.label.toLowerCase().replace(/\s+/g, '-')}`}
+              data-testid={`nav-${module.label.toLowerCase().replace(/\\s+/g, '-')}`}
               end={module.path === '/'}
             >
-              <Icon size={18} className="module-icon" />
-              <span className="module-label">{module.label}</span>
+              <Icon size={18} className=\"module-icon\" />
+              <span className=\"module-label\">{module.label}</span>
             </NavLink>
           );
         })}
       </div>
 
-      <div className="sidebar-footer">
+      <div className=\"sidebar-footer\">
         <button 
-          className="language-toggle" 
+          className=\"language-toggle\" 
           onClick={toggleLanguage}
-          data-testid="language-toggle"
+          data-testid=\"language-toggle\"
         >
-          <Globe size={16} className="language-icon" />
-          <span className="language-text">{language}</span>
-          <span className="language-divider">/</span>
-          <span className="language-text-inactive">{language === 'EN' ? 'FR' : 'EN'}</span>
+          <Globe size={16} className=\"language-icon\" />
+          <span className=\"language-text\">{language.toUpperCase()}</span>
+          <span className=\"language-divider\">/</span>
+          <span className=\"language-text-inactive\">{language === 'en' ? 'FR' : 'EN'}</span>
         </button>
-        <div className="language-note">Translation ready</div>
+        <div className=\"language-note\">{t('sidebar.translationReady')}</div>
       </div>
     </nav>
   );
