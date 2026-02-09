@@ -121,7 +121,7 @@ const DecisionReadiness = () => {
           <table className="audit-table" data-testid="audit-results-table">
             <thead>
               <tr>
-                <th>Company</th>
+                <th>{t('decisionReadiness.company')}</th>
                 <th>{t('decisionReadiness.type')}</th>
                 <th>{t('decisionReadiness.country')}</th>
                 <th>{t('decisionReadiness.scenarios')}</th>
@@ -153,4 +153,43 @@ const DecisionReadiness = () => {
             </tbody>
           </table>
         </div>
-      </DataPanel>\n\n      <DataPanel title={t('decisionReadiness.comexReadingTitle')} className=\"mb-6\">\n        <div className=\"reading-grid\">\n          <div className=\"reading-item\">\n            <h3 className=\"reading-title\">{t('decisionReadiness.pattern1')}</h3>\n            <p className=\"reading-text\">{t('decisionReadiness.pattern1Desc')}</p>\n          </div>\n          <div className=\"reading-item\">\n            <h3 className=\"reading-title\">{t('decisionReadiness.pattern2')}</h3>\n            <p className=\"reading-text\">{t('decisionReadiness.pattern2Desc')}</p>\n          </div>\n          <div className=\"reading-item\">\n            <h3 className=\"reading-title\">{t('decisionReadiness.pattern3')}</h3>\n            <p className=\"reading-text\">{t('decisionReadiness.pattern3Desc')}</p>\n          </div>\n        </div>\n      </DataPanel>\n\n      <DataPanel title={t('decisionReadiness.leaderPatterns')}>\n        <ul className=\"pattern-list\">\n          <li className=\"pattern-item\">\n            <strong>Navigation by Sectors/Applications:</strong> Pages oriented towards specific industries/segments, \n            enabling rapid relevance assessment.\n          </li>\n          <li className=\"pattern-item\">\n            <strong>Proof through Testimonials/Success Stories:</strong> Contextualized customer feedback with operational specifics, \n            not generic endorsements.\n          </li>\n          <li className=\"pattern-item\">\n            <strong>Contextualized Entry Points:</strong> Request forms and contact options matched to decision context \n            (quote, demo, support, emergency).\n          </li>\n          <li className=\"pattern-item\">\n            <strong>Explicated Support and Services:</strong> Clear information on after-sales, parts availability, technical support, \n            and digital services—critical for total-cost-of-ownership evaluation.\n          </li>\n        </ul>\n      </DataPanel>\n    </div>\n  );\n};\n\nexport default DecisionReadiness;
+      </DataPanel>
+
+      <DataPanel title={t('decisionReadiness.comexReadingTitle')} className="mb-6">
+        <div className="reading-grid">
+          <div className="reading-item">
+            <h3 className="reading-title">{t('decisionReadiness.pattern1')}</h3>
+            <p className="reading-text">{t('decisionReadiness.pattern1Desc')}</p>
+          </div>
+          <div className="reading-item">
+            <h3 className="reading-title">{t('decisionReadiness.pattern2')}</h3>
+            <p className="reading-text">{t('decisionReadiness.pattern2Desc')}</p>
+          </div>
+          <div className="reading-item">
+            <h3 className="reading-title">{t('decisionReadiness.pattern3')}</h3>
+            <p className="reading-text">{t('decisionReadiness.pattern3Desc')}</p>
+          </div>
+        </div>
+      </DataPanel>
+
+      <DataPanel title={t('decisionReadiness.leaderPatterns')}>
+        <ul className="pattern-list">
+          <li className="pattern-item">
+            <strong>{t('decisionReadiness.leaderPattern1Title')}</strong> {t('decisionReadiness.leaderPattern1Desc')}
+          </li>
+          <li className="pattern-item">
+            <strong>{t('decisionReadiness.leaderPattern2Title')}</strong> {t('decisionReadiness.leaderPattern2Desc')}
+          </li>
+          <li className="pattern-item">
+            <strong>{t('decisionReadiness.leaderPattern3Title')}</strong> {t('decisionReadiness.leaderPattern3Desc')}
+          </li>
+          <li className="pattern-item">
+            <strong>{t('decisionReadiness.leaderPattern4Title')}</strong> {t('decisionReadiness.leaderPattern4Desc')}
+          </li>
+        </ul>
+      </DataPanel>
+    </div>
+  );
+};
+
+export default DecisionReadiness;
