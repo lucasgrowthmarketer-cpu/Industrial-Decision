@@ -26,6 +26,23 @@
     "operatorSubtitle": "Digital Strategy & Industrial Web Architecture",
     "note": "A good industrial website does not sell. It reduces uncertainty."
   },
+  "systemStatus": {
+    "title": "System Status",
+    "subtitle": "Executive framing of the decision context",
+    "interfaceStatus": "Interface Status",
+    "operational": "Operational",
+    "lastUpdated": "Last Updated",
+    "interfacePurpose": "Interface Purpose",
+    "purposeText": "This system is designed as a decision support interface for industrial leadership. It aggregates market signals, operational benchmarks, and proof blocks to enable informed strategic decisions.",
+    "keyMetrics": "Key Metrics",
+    "modulesActive": "Modules Active",
+    "dataSourcesIntegrated": "Data Sources Integrated",
+    "regionsMonitored": "Regions Monitored",
+    "companiesAudited": "Companies Audited",
+    "decisionReadiness": "Decision Readiness",
+    "readinessText": "This interface is ready for executive-level discussions. All modules are operational and data is current.",
+    "viewModules": "View All Modules"
+  },
   "marketPressure": {
     "title": "Market Pressure",
     "subtitle": "Data-driven context for industrial decision-making",
@@ -56,6 +73,7 @@
     "auditResults": "Audit Results",
     "type": "Type",
     "country": "Country",
+    "company": "Company",
     "all": "All",
     "oem": "OEM",
     "integrator": "Integrator",
@@ -74,7 +92,15 @@
     "pattern2Desc": "Even high-performing sites frequently lack process transparency. 'How it works' remains implicit, forcing leaders to extract information through direct contact—adding friction and uncertainty.",
     "pattern3": "Decision-Grade Threshold: DRS ≥ 3.5",
     "pattern3Desc": "Sites scoring 3.5+ demonstrate operational readiness for executive-level evaluation. Below this threshold, websites function as catalogs requiring supplementary information gathering before decision consideration.",
-    "leaderPatterns": "Leader Patterns from Category Leaders"
+    "leaderPatterns": "Leader Patterns from Category Leaders",
+    "leaderPattern1Title": "Navigation by Sectors/Applications:",
+    "leaderPattern1Desc": "Pages oriented towards specific industries/segments, enabling rapid relevance assessment.",
+    "leaderPattern2Title": "Proof through Testimonials/Success Stories:",
+    "leaderPattern2Desc": "Contextualized customer feedback with operational specifics, not generic endorsements.",
+    "leaderPattern3Title": "Contextualized Entry Points:",
+    "leaderPattern3Desc": "Request forms and contact options matched to decision context (quote, demo, support, emergency).",
+    "leaderPattern4Title": "Explicated Support and Services:",
+    "leaderPattern4Desc": "Clear information on after-sales, parts availability, technical support, and digital services—critical for total-cost-of-ownership evaluation."
   },
   "decisionScenarios": {
     "title": "Decision Scenarios",
@@ -257,9 +283,3 @@
     "altares": "Altares"
   }
 }
-
-with open('/app/frontend/src/i18n/locales/en.json', 'w', encoding='utf-8') as f:
-    json.dump(en, f, indent=2, ensure_ascii=False)
-
-print("✓ EN file updated with COMEX Overview")
-ENDPYTHON

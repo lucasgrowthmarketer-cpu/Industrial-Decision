@@ -26,6 +26,23 @@
     "operatorSubtitle": "Stratégie Digitale & Architecture Web Industrielle",
     "note": "Un bon site industriel ne vend pas. Il réduit l'incertitude."
   },
+  "systemStatus": {
+    "title": "État du Système",
+    "subtitle": "Cadrage exécutif du contexte décisionnel",
+    "interfaceStatus": "Statut de l'Interface",
+    "operational": "Opérationnel",
+    "lastUpdated": "Dernière mise à jour",
+    "interfacePurpose": "Objectif de l'Interface",
+    "purposeText": "Ce système est conçu comme une interface d'aide à la décision pour la direction industrielle. Il agrège les signaux du marché, les benchmarks opérationnels et les blocs de preuve pour permettre des décisions stratégiques éclairées.",
+    "keyMetrics": "Métriques Clés",
+    "modulesActive": "Modules Actifs",
+    "dataSourcesIntegrated": "Sources de Données Intégrées",
+    "regionsMonitored": "Régions Surveillées",
+    "companiesAudited": "Entreprises Auditées",
+    "decisionReadiness": "Maturité Décisionnelle",
+    "readinessText": "Cette interface est prête pour les discussions de niveau exécutif. Tous les modules sont opérationnels et les données sont à jour.",
+    "viewModules": "Voir Tous les Modules"
+  },
   "marketPressure": {
     "title": "Pression du Marché",
     "subtitle": "Contexte data-driven pour la prise de décision industrielle",
@@ -56,6 +73,7 @@
     "auditResults": "Résultats de l'Audit",
     "type": "Type",
     "country": "Pays",
+    "company": "Entreprise",
     "all": "Tous",
     "oem": "OEM",
     "integrator": "Intégrateur",
@@ -74,7 +92,15 @@
     "pattern2Desc": "Même les sites hautement performants manquent fréquemment de transparence processuelle. Le 'comment ça marche' reste implicite, forçant les dirigeants à extraire l'information via contact direct—ajoutant friction et incertitude.",
     "pattern3": "Seuil Niveau Décisionnel : DRS ≥ 3,5",
     "pattern3Desc": "Les sites scorant 3,5+ démontrent une maturité opérationnelle pour l'évaluation de niveau exécutif. En dessous de ce seuil, les sites fonctionnent comme des catalogues nécessitant une collecte d'informations supplémentaires avant considération décisionnelle.",
-    "leaderPatterns": "Patterns des Leaders de Catégorie"
+    "leaderPatterns": "Patterns des Leaders de Catégorie",
+    "leaderPattern1Title": "Navigation par Secteurs/Applications :",
+    "leaderPattern1Desc": "Pages orientées vers des industries/segments spécifiques, permettant une évaluation rapide de la pertinence.",
+    "leaderPattern2Title": "Preuve via Témoignages/Success Stories :",
+    "leaderPattern2Desc": "Retours clients contextualisés avec des spécificités opérationnelles, pas des endorsements génériques.",
+    "leaderPattern3Title": "Points d'Entrée Contextualisés :",
+    "leaderPattern3Desc": "Formulaires de demande et options de contact adaptés au contexte décisionnel (devis, démo, support, urgence).",
+    "leaderPattern4Title": "Support et Services Explicités :",
+    "leaderPattern4Desc": "Information claire sur le SAV, disponibilité des pièces, support technique et services digitaux—critiques pour l'évaluation du coût total de possession."
   },
   "decisionScenarios": {
     "title": "Scénarios de Décision",
