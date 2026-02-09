@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import DataPanel from '../components/DataPanel';
 import Badge from '../components/Badge';
 import { decisionGates } from '../data/decision_gates';
 import { Clock, Mail, CheckCircle } from 'lucide-react';
 
 const DecisionGates = () => {
+  const { t } = useTranslation();
   const [selectedGate, setSelectedGate] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -36,15 +38,12 @@ const DecisionGates = () => {
   return (
     <div className="page-container" data-testid="decision-gates-page">
       <div className="page-header">
-        <h1 className="page-title">Decision Gates</h1>
-        <p className="page-subtitle">Context-appropriate entry points for industrial leaders</p>
+        <h1 className="page-title">{t('decisionGates.title')}</h1>
+        <p className="page-subtitle">{t('decisionGates.subtitle')}</p>
       </div>
 
       <DataPanel className="mb-6">
-        <p className="intro-text">
-          Decision gates match entry points to leader readiness and context. No generic contact forms—each gate 
-          is architected for specific decision scenarios with appropriate response protocols, timeframes, and information exchange formats.
-        </p>
+        <p className="intro-text">{t('decisionGates.intro')}</p>
       </DataPanel>
 
       <div className="gates-grid">
@@ -63,7 +62,7 @@ const DecisionGates = () => {
               <div className="gate-detail-item">
                 <Clock size={16} className="detail-icon" />
                 <div>
-                  <span className="detail-label">Response Timeframe</span>
+                  <span className="detail-label">{t('decisionGates.responseTimeframe')}</span>
                   <span className="detail-value">{gate.responseTimeframe}</span>
                 </div>
               </div>
@@ -71,14 +70,14 @@ const DecisionGates = () => {
               <div className="gate-detail-item">
                 <Mail size={16} className="detail-icon" />
                 <div>
-                  <span className="detail-label">Exchange Format</span>
+                  <span className="detail-label">{t('decisionGates.exchangeFormat')}</span>
                   <span className="detail-value">{gate.exchangeFormat}</span>
                 </div>
               </div>
             </div>
 
             <div className="gate-section">
-              <h4 className="gate-section-title">What Happens Next</h4>
+              <h4 className="gate-section-title">{t('decisionGates.whatHappensNext')}</h4>
               <ul className="gate-list">
                 {gate.whatHappens.map((item, index) => (
                   <li key={index} className="gate-list-item">
@@ -90,7 +89,7 @@ const DecisionGates = () => {
             </div>
 
             <div className="gate-section">
-              <h4 className="gate-section-title">Ideal For</h4>
+              <h4 className="gate-section-title">{t('decisionGates.idealFor')}</h4>
               <ul className="gate-list small">
                 {gate.idealFor.map((item, index) => (
                   <li key={index} className="gate-list-item-small">{item}</li>
@@ -103,7 +102,7 @@ const DecisionGates = () => {
               onClick={() => setSelectedGate(gate)}
               data-testid={`gate-enter-btn-${gate.id}`}
             >
-              Enter via {gate.title} Gate
+              {t('decisionGates.enterVia')} {gate.title} {t('decisionGates.gate')}
             </button>
           </div>
         ))}
@@ -126,7 +125,7 @@ const DecisionGates = () => {
             {!submitted ? (
               <form onSubmit={handleSubmit} className="gate-form" data-testid="gate-entry-form">
                 <div className="form-info">
-                  <Badge variant="info">Required Information</Badge>
+                  <Badge variant="info">{t('decisionGates.requiredInfo')}</Badge>
                   <ul className="form-info-list">
                     {selectedGate.requiredInfo.map((info, index) => (
                       <li key={index}>{info}</li>
@@ -181,7 +180,7 @@ const DecisionGates = () => {
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Context / Timeline *</label>
+                  <label className="form-label">{t('decisionGates.contextTimeline')} *</label>
                   <textarea
                     className="form-textarea"
                     value={formData.context}
@@ -193,7 +192,7 @@ const DecisionGates = () => {
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Additional Information</label>
+                  <label className="form-label">{t('decisionGates.additionalInfo')}</label>
                   <textarea
                     className="form-textarea"
                     value={formData.message}
@@ -205,20 +204,19 @@ const DecisionGates = () => {
 
                 <div className="form-footer">
                   <p className="form-note">
-                    Expected response: {selectedGate.responseTimeframe}
+                    {t('decisionGates.expectedResponse')}: {selectedGate.responseTimeframe}
                   </p>
                   <button type="submit" className="form-submit" data-testid="gate-form-submit">
-                    Submit {selectedGate.title} Request
+                    {t('decisionGates.submitRequest')} {selectedGate.title}
                   </button>
                 </div>
               </form>
             ) : (
               <div className="form-success" data-testid="gate-form-success">
                 <CheckCircle size={48} className="success-icon" />
-                <h3 className="success-title">Request Received</h3>
+                <h3 className="success-title">{t('decisionGates.requestReceived')}</h3>
                 <p className="success-text">
-                  Your {selectedGate.title.toLowerCase()} request has been received and assigned. 
-                  You will receive initial contact within {selectedGate.responseTimeframe}.
+                  {t('decisionGates.requestReceivedText')} {selectedGate.responseTimeframe}.
                 </p>
               </div>
             )}
@@ -226,12 +224,8 @@ const DecisionGates = () => {
         </div>
       )}
 
-      <DataPanel title="No Generic Contact Forms">
-        <p className="reading-text">
-          Traditional websites use universal contact forms that fail to match leader context. Decision gates, by contrast, 
-          are architected for specific scenarios with appropriate information requirements, response protocols, and 
-          confidentiality handling. This reduces friction, increases trust, and enables leaders to engage at their readiness level.
-        </p>
+      <DataPanel title={t('decisionGates.noGenericForms')}>
+        <p className="reading-text">{t('decisionGates.noGenericFormsText')}</p>
       </DataPanel>
     </div>
   );

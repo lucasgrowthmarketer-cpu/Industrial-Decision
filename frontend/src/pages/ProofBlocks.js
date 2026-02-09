@@ -1,22 +1,25 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import DataPanel from '../components/DataPanel';
 import Badge from '../components/Badge';
 import { proofBlocks, governanceMetrics } from '../data/proof_blocks';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
 const ProofBlocks = () => {
+  const { t } = useTranslation();
+  
   return (
     <div className="page-container" data-testid="proof-blocks-page">
       <div className="page-header">
-        <h1 className="page-title">Proof Blocks</h1>
-        <p className="page-subtitle">Trust is built through operational signals</p>
+        <h1 className="page-title">{t('proofBlocks.title')}</h1>
+        <p className="page-subtitle">{t('proofBlocks.subtitle')}</p>
       </div>
 
-      <DataPanel title="Governance Rule: Metrics Display" className="mb-6">
+      <DataPanel title={t('proofBlocks.governanceRule')} className="mb-6">
         <div className="governance-grid">
           <div className="governance-section">
-            <h3 className="governance-title">Explicit Figures</h3>
-            <p className="governance-desc">Used only for robust, repeatable, discussable KPIs</p>
+            <h3 className="governance-title">{t('proofBlocks.explicitFigures')}</h3>
+            <p className="governance-desc">{t('proofBlocks.explicitDesc')}</p>
             <ul className="governance-list">
               {governanceMetrics.explicit.map((metric, index) => (
                 <li key={index} className="governance-item">
@@ -28,8 +31,8 @@ const ProofBlocks = () => {
           </div>
 
           <div className="governance-section">
-            <h3 className="governance-title">Indexed Metrics</h3>
-            <p className="governance-desc">Used when data is sensitive or context-dependent</p>
+            <h3 className="governance-title">{t('proofBlocks.indexedMetrics')}</h3>
+            <p className="governance-desc">{t('proofBlocks.indexedDesc')}</p>
             <ul className="governance-list">
               {governanceMetrics.indexed.map((metric, index) => (
                 <li key={index} className="governance-item">
@@ -53,17 +56,17 @@ const ProofBlocks = () => {
             </div>
 
             <div className="proof-challenge">
-              <h4 className="proof-section-title">Challenge</h4>
+              <h4 className="proof-section-title">{t('proofBlocks.challenge')}</h4>
               <p className="proof-text">{proof.challenge}</p>
             </div>
 
             <div className="proof-intervention">
-              <h4 className="proof-section-title">Intervention</h4>
+              <h4 className="proof-section-title">{t('proofBlocks.intervention')}</h4>
               <Badge variant="info">{proof.intervention}</Badge>
             </div>
 
             <div className="proof-metrics">
-              <h4 className="proof-section-title">Operational Impact</h4>
+              <h4 className="proof-section-title">{t('proofBlocks.operationalImpact')}</h4>
               <div className="metrics-grid">
                 {proof.metrics.map((metric, index) => (
                   <div key={index} className="metric-card" data-testid="proof-metric">
@@ -102,30 +105,19 @@ const ProofBlocks = () => {
         ))}
       </div>
 
-      <DataPanel title="Anonymization & Confidentiality Note">
-        <p className="reading-text">
-          Company names and specific details are anonymized to protect client confidentiality. Metrics represent 
-          actual operational outcomes but are presented in ranges or indices where precision would compromise discretion. 
-          This approach balances proof credibility with professional confidentiality requirements common in industrial contexts.
-        </p>
+      <DataPanel title={t('proofBlocks.anonymizationNote')}>
+        <p className="reading-text">{t('proofBlocks.anonymizationText')}</p>
       </DataPanel>
 
-      <DataPanel title="URI & DRS Index Explanation" className="mt-6">
+      <DataPanel title={t('proofBlocks.indexExplanation')} className="mt-6">
         <div className="index-explanation">
           <div className="index-item">
-            <h4 className="index-title">URI (Uncertainty Reduction Index)</h4>
-            <p className="index-text">
-              Measures the percentage of visitors completing a full engagement pathway: 
-              Scenario → Process → Proof → Decision Gate. Higher URI indicates more effective uncertainty reduction 
-              before first contact, enabling confident decision initiation.
-            </p>
+            <h4 className="index-title">{t('proofBlocks.uriTitle')}</h4>
+            <p className="index-text">{t('proofBlocks.uriDesc')}</p>
           </div>
           <div className="index-item">
-            <h4 className="index-title">DRS (Decision Readiness Score)</h4>
-            <p className="index-text">
-              Composite score (0-4) evaluating website architecture across four decision-support dimensions: 
-              Scenarios, Process Visibility, Proof Blocks, and Clear Entry Points. Scores ≥3.5 indicate decision-grade architecture.
-            </p>
+            <h4 className="index-title">{t('proofBlocks.drsTitle')}</h4>
+            <p className="index-text">{t('proofBlocks.drsDesc')}</p>
           </div>
         </div>
       </DataPanel>
