@@ -1,53 +1,55 @@
-import { useEffect } from "react";
-import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
-  return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
-};
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
+import OperatorPanel from './components/OperatorPanel';
+import SystemStatus from './pages/SystemStatus';
+import MarketPressure from './pages/MarketPressure';
+import DecisionReadiness from './pages/DecisionReadiness';
+import DecisionScenarios from './pages/DecisionScenarios';
+import ProcessVisibility from './pages/ProcessVisibility';
+import ProofBlocks from './pages/ProofBlocks';
+import DecisionGates from './pages/DecisionGates';
+import SourcesMethod from './pages/SourcesMethod';
+import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <div className="app-container" data-testid="app-container">
+        <Sidebar />
+        
+        <main className="main-canvas">
+          <Routes>
+            <Route path="/" element={<SystemStatus />} />
+            <Route path="/market-pressure" element={<MarketPressure />} />
+            <Route path="/decision-readiness" element={<DecisionReadiness />} />
+            <Route path="/scenarios" element={<DecisionScenarios />} />
+            <Route path="/process" element={<ProcessVisibility />} />
+            <Route path="/proof" element={<ProofBlocks />} />
+            <Route path="/gates" element={<DecisionGates />} />
+            <Route path="/sources" element={<SourcesMethod />} />
+          </Routes>
+        </main>
+
+        <OperatorPanel className="operator-fixed" />
+
+        <footer className="app-footer">
+          <div className="footer-operator">
+            <div className="footer-operator-title">Operator / Analyst</div>
+            <div className="footer-operator-name">Lucas Ansel</div>
+            <div className="footer-operator-subtitle">Digital Strategy & Industrial Web Architecture</div>
+            <div className="footer-operator-contact">
+              <a href="mailto:lucas.growthmarketer@gmail.com">lucas.growthmarketer@gmail.com</a>
+              <span className="footer-divider">|</span>
+              <a href="https://wa.me/33611752581" target="_blank" rel="noopener noreferrer">WhatsApp: +33 6 11 75 25 81</a>
+            </div>
+          </div>
+          <div className="footer-note">
+            A good industrial website does not sell. It reduces uncertainty.
+          </div>
+        </footer>
+      </div>
+    </BrowserRouter>
   );
 }
 
