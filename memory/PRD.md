@@ -15,7 +15,7 @@ Build a sophisticated web application called "Industrial Decision Interface" - a
 - Central canvas for content
 - Right column for Operator Panel
 
-### Modules (9 Pages)
+### Modules (10 Pages)
 1. **System Status** - Executive framing of decision context
 2. **COMEX Overview** - Executive summary answering "What does this prove?"
 3. **Market Pressure** - Industrial stress indicators with France choropleth map
@@ -24,7 +24,8 @@ Build a sophisticated web application called "Industrial Decision Interface" - a
 6. **Process Visibility** - End-to-end operational clarity
 7. **Proof Blocks** - Anonymized operational signals
 8. **Decision Gates** - Contextual contact entry points
-9. **Sources & Method** - Transparency and governance
+9. **Decision Amplifiers** - Four-layer system architecture (NEW)
+10. **Sources & Method** - Transparency and governance
 
 ### Key Features
 - ✅ Full EN/FR translation with language toggle
@@ -62,6 +63,14 @@ Build a sophisticated web application called "Industrial Decision Interface" - a
 │   ├── ProcessVisibility.js
 │   ├── ProofBlocks.js
 │   ├── DecisionGates.js
+│   ├── DecisionAmplifiers/ (NEW)
+│   │   ├── index.js
+│   │   ├── DecisionAmplifiers.js
+│   │   ├── ArchitectureMap.js
+│   │   ├── VisibilityLayer.js
+│   │   ├── TrustLayer.js
+│   │   ├── ActivationLayer.js
+│   │   └── SystemCoherenceIndex.js
 │   └── SourcesMethod.js
 └── data/
     ├── industrial_pressure.js
@@ -69,34 +78,43 @@ Build a sophisticated web application called "Industrial Decision Interface" - a
     ├── scenarios.js
     ├── process_flows.js
     ├── proof_blocks.js
-    └── decision_gates.js
+    ├── decision_gates.js
+    └── decisionAmplifiersData.js (NEW)
 ```
 
 ## What's Implemented (Dec 9, 2025)
-- ✅ Full 9-page application with all modules
+- ✅ Full 10-page application with all modules
 - ✅ Mission control dark theme styling
 - ✅ Complete EN/FR translation system with react-i18next
 - ✅ Language toggle in sidebar with localStorage persistence
-- ✅ All translation keys for all 9 pages (EN and FR)
+- ✅ All translation keys for all 10 pages (EN and FR)
 - ✅ Operator Panel with contact info and LinkedIn link
 - ✅ Footer with operator information
 - ✅ Responsive sidebar navigation
 - ✅ Data visualizations (KPI widgets, charts, tables)
 - ✅ France choropleth map for Market Pressure
+- ✅ **NEW: Decision Amplifiers module with:**
+  - Four-layer architecture map (Infrastructure, Visibility, Trust, Activation)
+  - Intent Clusters with urgency levels (U3-U5)
+  - Network Decision Metrics (6.8 decision makers, 4 touchpoints, 21 days, 3.4% engagement)
+  - Reference Sources (Edelman, LinkedIn B2B Institute, Gartner)
+  - Activation Logic Chain (4 steps)
+  - System Coherence Index (SCI) gauge with component breakdown
+  - Governance Principles (4 rules)
+  - Full EN/FR translations
 
 ## Test Results
-- **Translation System**: 100% pass rate
-- **All 9 pages**: Translated correctly EN ↔ FR
-- **Language Toggle**: Working correctly
-- **Sidebar/Footer/Operator Panel**: Translated correctly
-- **Language Persistence**: Working via localStorage
+- **Translation System**: 100% pass rate (all 10 pages)
+- **Decision Amplifiers Module**: 100% pass rate (13/13 tests)
+- **Language Toggle**: Working correctly on all pages
+- **SCI Calculation**: Working correctly (weighted composite)
 
-## Future Tasks (P2 - Optional)
-- Extend benchmarks to additional OEMs or countries
-- Add side-by-side comparison between industrial actors
-- Integrate additional process scenarios
-- Add internal decision scoring or prioritization tools
-- Deploy additional localized language versions
+## Indices Defined
+| Index | Name | Description |
+|-------|------|-------------|
+| DRS | Decision Readiness Score | 0-4 score for website decision support |
+| URI | Uncertainty Reduction Index | Visitor pathway completion % |
+| SCI | System Coherence Index | Weighted composite (0-100) of DRS, URI, Intent Coverage, Trust Signal, Activation Readiness |
 
 ## Routes
 | Path | Page |
@@ -109,7 +127,15 @@ Build a sophisticated web application called "Industrial Decision Interface" - a
 | `/process` | Process Visibility |
 | `/proof` | Proof Blocks |
 | `/gates` | Decision Gates |
+| `/amplifiers` | Decision Amplifiers (NEW) |
 | `/sources` | Sources & Method |
+
+## Future Tasks (P2 - Optional)
+- Extend benchmarks to additional OEMs or countries
+- Add side-by-side comparison between industrial actors
+- Integrate additional process scenarios
+- Add internal decision scoring or prioritization tools
+- Deploy additional localized language versions
 
 ## Preview URL
 https://leadership-ops-hub.preview.emergentagent.com
