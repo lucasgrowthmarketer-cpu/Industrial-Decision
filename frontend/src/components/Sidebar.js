@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Activity, Database, Target, FileText, GitBranch, Shield, DoorOpen, BookOpen, Layers, Globe } from 'lucide-react';
+import { Activity, Database, Target, FileText, GitBranch, Shield, DoorOpen, BookOpen, Layers, Globe, Zap } from 'lucide-react';
 
 const Sidebar = () => {
   const { t, i18n } = useTranslation();
@@ -16,6 +16,7 @@ const Sidebar = () => {
     { path: '/process', label: t('sidebar.processVisibility'), icon: GitBranch },
     { path: '/proof', label: t('sidebar.proofBlocks'), icon: Shield },
     { path: '/gates', label: t('sidebar.decisionGates'), icon: DoorOpen },
+    { path: '/amplifiers', label: t('sidebar.decisionAmplifiers'), icon: Zap },
     { path: '/sources', label: t('sidebar.sourcesMethod'), icon: BookOpen }
   ];
 
