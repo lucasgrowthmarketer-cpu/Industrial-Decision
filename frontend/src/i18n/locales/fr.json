@@ -201,7 +201,16 @@
     "principleText": "Transparence où la précision ajoute de la valeur ; indexation où la dépendance contextuelle ou la confidentialité nécessite l'abstraction.",
     "interfaceClassification": "Classification de l'Interface",
     "semiConfidential": "Outil Semi-Confidentiel",
-    "classificationText": "Cette interface est un outil d'intelligence décisionnelle partagé sélectivement avec dirigeants industriels, conseillers stratégiques et décideurs opérationnels. Ce n'est pas un site web marketing public."
+    "classificationText": "Cette interface est un outil d'intelligence décisionnelle partagé sélectivement avec dirigeants industriels, conseillers stratégiques et décideurs opérationnels. Ce n'est pas un site web marketing public.",
+    "scenariosTitle": "Scénarios (0-1)",
+    "scenariosDesc": "Présence de pages industrie/application permettant l'identification du dirigeant avec le contenu. Crédit partiel pour les cas d'usage génériques manquant de spécificité sectorielle.",
+    "processVisibilityTitle": "Visibilité Processus (0-1)",
+    "processVisibilityDesc": "Explication des parcours opérationnels (projet, installation, support, formation). Crédit partiel pour information de processus incomplète ou vague.",
+    "proofBlocksTitle": "Blocs de Preuve (0-1)",
+    "proofBlocksDesc": "Témoignages, études de cas ou références contextualisées. Crédit partiel pour endorsements génériques manquant de spécificités opérationnelles.",
+    "clearEntryTitle": "Points d'Entrée Clairs (0-1)",
+    "clearEntryDesc": "Options de contact contextualisées (devis, démo, support, urgence). Crédit partiel pour formulaires génériques ou routage peu clair.",
+    "formulaNote": "Les scores ≥3,5 indiquent une architecture de niveau décisionnel"
   },
   "comexOverview": {
     "title": "Vue d'ensemble COMEX",
