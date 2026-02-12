@@ -201,6 +201,20 @@
     "principleText": "Transparency where precision adds value; indexing where context dependency or confidentiality requires abstraction.",
     "interfaceClassification": "Interface Classification",
     "semiConfidential": "Semi-Confidential Tool",
+    "classificationText": "This interface is a decision intelligence tool shared selectively with industrial leaders, strategic advisors, and operational decision-makers. It is not a public marketing website.",
+    "scenariosTitle": "Scenarios (0-1)",
+    "scenariosDesc": "Presence of industry/application pages enabling leader identification with content. Partial credit for generic use cases lacking industry specificity.",
+    "processVisibilityTitle": "Process Visibility (0-1)",
+    "processVisibilityDesc": "Explanation of operational pathways (project, installation, support, training). Partial credit for incomplete or vague process information.",
+    "proofBlocksTitle": "Proof Blocks (0-1)",
+    "proofBlocksDesc": "Testimonials, case studies, or contextualized references. Partial credit for generic endorsements lacking operational specifics.",
+    "clearEntryTitle": "Clear Entry Points (0-1)",
+    "clearEntryDesc": "Contextualized contact options (quote, demo, support, emergency). Partial credit for generic forms or unclear routing.",
+    "formulaNote": "Scores ≥3.5 indicate decision-grade architecture"
+  },
+    "principleText": "Transparency where precision adds value; indexing where context dependency or confidentiality requires abstraction.",
+    "interfaceClassification": "Interface Classification",
+    "semiConfidential": "Semi-Confidential Tool",
     "classificationText": "This interface is a decision intelligence tool shared selectively with industrial leaders, strategic advisors, and operational decision-makers. It is not a public marketing website."
   },
   "comexOverview": {
