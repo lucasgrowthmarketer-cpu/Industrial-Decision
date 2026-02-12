@@ -6,7 +6,8 @@ import { proofBlocks, governanceMetrics } from '../data/proof_blocks';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
 const ProofBlocks = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
   
   return (
     <div className="page-container" data-testid="proof-blocks-page">
@@ -23,8 +24,8 @@ const ProofBlocks = () => {
             <ul className="governance-list">
               {governanceMetrics.explicit.map((metric, index) => (
                 <li key={index} className="governance-item">
-                  <Badge variant="success">Explicit</Badge>
-                  {metric}
+                  <Badge variant="success">{lang === 'fr' ? 'Explicite' : 'Explicit'}</Badge>
+                  {lang === 'fr' ? metric.labelFr : metric.label}
                 </li>
               ))}
             </ul>
@@ -37,7 +38,7 @@ const ProofBlocks = () => {
               {governanceMetrics.indexed.map((metric, index) => (
                 <li key={index} className="governance-item">
                   <Badge variant="warning">Index</Badge>
-                  {metric}
+                  {lang === 'fr' ? metric.labelFr : metric.label}
                 </li>
               ))}
             </ul>
@@ -51,18 +52,18 @@ const ProofBlocks = () => {
             <div className="proof-header">
               <div>
                 <h3 className="proof-company">{proof.company}</h3>
-                <p className="proof-meta">{proof.sector} • {proof.region} • {proof.timeframe}</p>
+                <p className="proof-meta">{lang === 'fr' ? proof.sectorFr : proof.sector} • {proof.region} • {proof.timeframe}</p>
               </div>
             </div>
 
             <div className="proof-challenge">
               <h4 className="proof-section-title">{t('proofBlocks.challenge')}</h4>
-              <p className="proof-text">{proof.challenge}</p>
+              <p className="proof-text">{lang === 'fr' ? proof.challengeFr : proof.challenge}</p>
             </div>
 
             <div className="proof-intervention">
               <h4 className="proof-section-title">{t('proofBlocks.intervention')}</h4>
-              <Badge variant="info">{proof.intervention}</Badge>
+              <Badge variant="info">{lang === 'fr' ? proof.interventionFr : proof.intervention}</Badge>
             </div>
 
             <div className="proof-metrics">
@@ -70,7 +71,7 @@ const ProofBlocks = () => {
               <div className="metrics-grid">
                 {proof.metrics.map((metric, index) => (
                   <div key={index} className="metric-card" data-testid="proof-metric">
-                    <span className="metric-label">{metric.label}</span>
+                    <span className="metric-label">{lang === 'fr' ? metric.labelFr : metric.label}</span>
                     <div className="metric-value-group">
                       {metric.before && (
                         <span className="metric-before">{metric.before}</span>
@@ -91,7 +92,7 @@ const ProofBlocks = () => {
                           {metric.improvement}
                         </span>
                       )}
-                      {metric.value && (
+                      {metric.value && metric.isIndex && (
                         <span className="metric-index">
                           <Badge variant="warning">Index: {metric.value}</Badge>
                         </span>
