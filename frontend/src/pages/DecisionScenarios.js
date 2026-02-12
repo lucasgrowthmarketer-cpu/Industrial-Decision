@@ -5,7 +5,8 @@ import { decisionScenarios } from '../data/scenarios';
 import { AlertCircle, CheckCircle, XCircle } from 'lucide-react';
 
 const DecisionScenarios = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
   
   return (
     <div className="page-container" data-testid="decision-scenarios-page">
@@ -19,7 +20,12 @@ const DecisionScenarios = () => {
       </DataPanel>
 
       {decisionScenarios.map((scenario) => (
-        <DataPanel key={scenario.id} title={scenario.title} subtitle={scenario.context} className="mb-6">
+        <DataPanel 
+          key={scenario.id} 
+          title={lang === 'fr' ? scenario.titleFr : scenario.title} 
+          subtitle={lang === 'fr' ? scenario.contextFr : scenario.context} 
+          className="mb-6"
+        >
           <div className="scenario-grid">
             <div className="scenario-section">
               <div className="scenario-section-header">
@@ -27,7 +33,7 @@ const DecisionScenarios = () => {
                 <h3 className="scenario-section-title">{t('decisionScenarios.whatLeadersNeed')}</h3>
               </div>
               <ul className="scenario-list">
-                {scenario.leaderNeeds.map((need, index) => (
+                {(lang === 'fr' ? scenario.leaderNeedsFr : scenario.leaderNeeds).map((need, index) => (
                   <li key={index} className="scenario-list-item">{need}</li>
                 ))}
               </ul>
@@ -39,7 +45,7 @@ const DecisionScenarios = () => {
                 <h3 className="scenario-section-title">{t('decisionScenarios.typicalFailures')}</h3>
               </div>
               <ul className="scenario-list">
-                {scenario.typicalFailures.map((failure, index) => (
+                {(lang === 'fr' ? scenario.typicalFailuresFr : scenario.typicalFailures).map((failure, index) => (
                   <li key={index} className="scenario-list-item">{failure}</li>
                 ))}
               </ul>
@@ -51,7 +57,7 @@ const DecisionScenarios = () => {
                 <h3 className="scenario-section-title">{t('decisionScenarios.decisionBlockers')}</h3>
               </div>
               <ul className="scenario-list">
-                {scenario.decisionBlockers.map((blocker, index) => (
+                {(lang === 'fr' ? scenario.decisionBlockersFr : scenario.decisionBlockers).map((blocker, index) => (
                   <li key={index} className="scenario-list-item">{blocker}</li>
                 ))}
               </ul>
