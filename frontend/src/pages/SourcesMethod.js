@@ -53,41 +53,29 @@ const SourcesMethod = () => {
 
             <div className="criteria-grid">
               <div className="criteria-item">
-                <h4 className="criteria-title">Scenarios (0-1)</h4>
-                <p className="criteria-text">
-                  Presence of industry/application pages enabling leader identification with content. 
-                  Partial credit for generic use cases lacking industry specificity.
-                </p>
+                <h4 className="criteria-title">{t('sourcesMethod.scenariosTitle')}</h4>
+                <p className="criteria-text">{t('sourcesMethod.scenariosDesc')}</p>
               </div>
 
               <div className="criteria-item">
-                <h4 className="criteria-title">Process Visibility (0-1)</h4>
-                <p className="criteria-text">
-                  Explanation of operational pathways (project, installation, support, training). 
-                  Partial credit for incomplete or vague process information.
-                </p>
+                <h4 className="criteria-title">{t('sourcesMethod.processVisibilityTitle')}</h4>
+                <p className="criteria-text">{t('sourcesMethod.processVisibilityDesc')}</p>
               </div>
 
               <div className="criteria-item">
-                <h4 className="criteria-title">Proof Blocks (0-1)</h4>
-                <p className="criteria-text">
-                  Testimonials, case studies, or contextualized references. Partial credit for generic endorsements 
-                  lacking operational specifics.
-                </p>
+                <h4 className="criteria-title">{t('sourcesMethod.proofBlocksTitle')}</h4>
+                <p className="criteria-text">{t('sourcesMethod.proofBlocksDesc')}</p>
               </div>
 
               <div className="criteria-item">
-                <h4 className="criteria-title">Clear Entry Points (0-1)</h4>
-                <p className="criteria-text">
-                  Contextualized contact options (quote, demo, support, emergency). Partial credit for generic forms 
-                  or unclear routing.
-                </p>
+                <h4 className="criteria-title">{t('sourcesMethod.clearEntryTitle')}</h4>
+                <p className="criteria-text">{t('sourcesMethod.clearEntryDesc')}</p>
               </div>
             </div>
 
             <div className="formula-box">
               <p className="formula-text">{t('decisionReadiness.drsFormula')}</p>
-              <p className="formula-note">Scores ≥3.5 indicate decision-grade architecture</p>
+              <p className="formula-note">{t('sourcesMethod.formulaNote')}</p>
             </div>
           </div>
         </div>
