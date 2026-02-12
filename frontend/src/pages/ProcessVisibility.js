@@ -6,7 +6,8 @@ import { processFlows } from '../data/process_flows';
 import { ChevronRight } from 'lucide-react';
 
 const ProcessVisibility = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
   const [selectedProcess, setSelectedProcess] = useState(processFlows[0]);
 
   return (
@@ -25,18 +26,18 @@ const ProcessVisibility = () => {
               onClick={() => setSelectedProcess(process)}
               data-testid={`process-tab-${process.id}`}
             >
-              {process.title}
+              {lang === 'fr' ? process.titleFr : process.title}
             </button>
           ))}
         </div>
       </DataPanel>
 
       <DataPanel 
-        title={selectedProcess.title} 
-        subtitle={selectedProcess.subtitle}
+        title={lang === 'fr' ? selectedProcess.titleFr : selectedProcess.title} 
+        subtitle={lang === 'fr' ? selectedProcess.subtitleFr : selectedProcess.subtitle}
         className="mb-6"
       >
-        <p className="process-description">{selectedProcess.description}</p>
+        <p className="process-description">{lang === 'fr' ? selectedProcess.descriptionFr : selectedProcess.description}</p>
       </DataPanel>
 
       <div className="process-flow">
@@ -44,15 +45,15 @@ const ProcessVisibility = () => {
           <div key={stage.id} className="process-stage" data-testid="process-stage">
             <div className="stage-header">
               <div className="stage-number">{index + 1}</div>
-              <h3 className="stage-name">{stage.name}</h3>
-              <Badge variant="info">{stage.timeframe}</Badge>
+              <h3 className="stage-name">{lang === 'fr' ? stage.nameFr : stage.name}</h3>
+              <Badge variant="info">{lang === 'fr' ? stage.timeframeFr : stage.timeframe}</Badge>
             </div>
 
             <div className="stage-content">
               <div className="stage-section">
                 <h4 className="stage-section-title">{t('processVisibility.inputs')}</h4>
                 <ul className="stage-list">
-                  {stage.inputs.map((input, idx) => (
+                  {(lang === 'fr' ? stage.inputsFr : stage.inputs).map((input, idx) => (
                     <li key={idx} className="stage-list-item">
                       <ChevronRight size={14} className="list-icon" />
                       {input}
@@ -64,7 +65,7 @@ const ProcessVisibility = () => {
               <div className="stage-section">
                 <h4 className="stage-section-title">{t('processVisibility.outputs')}</h4>
                 <ul className="stage-list">
-                  {stage.outputs.map((output, idx) => (
+                  {(lang === 'fr' ? stage.outputsFr : stage.outputs).map((output, idx) => (
                     <li key={idx} className="stage-list-item">
                       <ChevronRight size={14} className="list-icon" />
                       {output}
@@ -76,7 +77,7 @@ const ProcessVisibility = () => {
               <div className="stage-section">
                 <h4 className="stage-section-title">{t('processVisibility.commitments')}</h4>
                 <ul className="stage-list">
-                  {stage.commitments.map((commitment, idx) => (
+                  {(lang === 'fr' ? stage.commitmentsFr : stage.commitments).map((commitment, idx) => (
                     <li key={idx} className="stage-list-item commitment">
                       <ChevronRight size={14} className="list-icon" />
                       {commitment}
@@ -88,7 +89,7 @@ const ProcessVisibility = () => {
               <div className="stage-section">
                 <h4 className="stage-section-title">{t('processVisibility.risks')}</h4>
                 <ul className="stage-list">
-                  {stage.risks.map((risk, idx) => (
+                  {(lang === 'fr' ? stage.risksFr : stage.risks).map((risk, idx) => (
                     <li key={idx} className="stage-list-item risk">
                       <ChevronRight size={14} className="list-icon" />
                       {risk}
@@ -109,9 +110,9 @@ const ProcessVisibility = () => {
         <div className="gates-applicability">
           {selectedProcess.decisionGates.map((gate) => (
             <div key={gate.gate} className="gate-item">
-              <Badge variant="success">{gate.gate}</Badge>
+              <Badge variant="success">{lang === 'fr' ? gate.gateFr : gate.gate}</Badge>
               <span className="gate-stages">
-                {t('processVisibility.applicableTo')}: {gate.applicableStages.map(s => s.replace('stage', 'Stage ')).join(', ')}
+                {t('processVisibility.applicableTo')}: {gate.applicableStages.map(s => s.replace('stage', lang === 'fr' ? 'Étape ' : 'Stage ')).join(', ')}
               </span>
             </div>
           ))}
