@@ -112,7 +112,7 @@ body {
 
 .system-version {
   font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
+  color: #8096b8;
   margin-top: var(--spacing-sm);
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -130,7 +130,7 @@ body {
   align-items: center;
   gap: var(--spacing-md);
   padding: var(--spacing-md);
-  color: var(--color-text-secondary);
+  color: #4a5568;
   text-decoration: none;
   border-radius: 6px;
   transition: all var(--transition-base);
@@ -140,19 +140,19 @@ body {
 }
 
 .sidebar-module:hover {
-  background-color: var(--color-background-lighter);
-  color: var(--color-text);
-  border-color: var(--color-border-light);
+  background-color: #e8ecf0;
+  color: #1a1f2e;
+  border-color: #d0d5dd;
 }
 
 .sidebar-module.active {
   background-color: var(--color-accent);
-  color: var(--color-background);
+  color: white;
   border-color: var(--color-accent);
 }
 
 .sidebar-module.active .module-icon {
-  color: var(--color-background);
+  color: white;
 }
 
 .module-icon {
