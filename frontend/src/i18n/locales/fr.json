@@ -11,6 +11,7 @@
     "proofBlocks": "Blocs de Preuve",
     "decisionGates": "Portes de Décision",
     "decisionAmplifiers": "Amplificateurs de Décision",
+    "team": "Équipe",
     "sourcesMethod": "Sources & Méthode",
     "translationReady": "Traduction prête"
   },
@@ -22,10 +23,17 @@
     "linkedin": "Profil LinkedIn"
   },
   "footer": {
-    "operatorTitle": "Opérateur / Analyste",
-    "operatorName": "Lucas Ansel",
+    "operatorTitle": "Opéré par",
+    "operatorName": "Industrial Decision",
     "operatorSubtitle": "Stratégie Digitale & Architecture Web Industrielle",
-    "note": "Un bon site industriel ne vend pas. Il réduit l'incertitude."
+    "note": "Concevoir de Meilleures Décisions."
+  },
+  "team": {
+    "title": "Équipe",
+    "subtitle": "Les esprits derrière Industrial Decision Interface",
+    "intro": "Notre équipe combine expertise en stratégie digitale, profondeur d'implémentation technique et des décennies d'expérience en opérations industrielles. Chaque membre apporte une perspective distincte essentielle pour construire des systèmes d'aide à la décision fonctionnant dans des contextes industriels réels.",
+    "collectiveApproach": "Notre Approche Collective",
+    "approachText": "La prise de décision industrielle nécessite plus que des capacités techniques. Elle nécessite une crédibilité opérationnelle, une vision stratégique et une exécution systématique. Notre équipe intègre ces dimensions pour livrer des solutions ancrées dans la réalité industrielle, pas des cadres de conseil abstraits."
   },
   "systemStatus": {
     "title": "État du Système",
