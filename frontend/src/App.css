@@ -227,15 +227,16 @@ body {
   grid-row: 1;
   padding: var(--spacing-2xl);
   overflow-y: auto;
-  background: radial-gradient(ellipse at top, #2a2a2a 0%, var(--color-background) 50%);
+  background: var(--color-background);
 }
 
 /* Operator Panel */
 .operator-panel {
-  background: linear-gradient(135deg, var(--color-background-darker) 0%, var(--color-background-lighter) 100%);
+  background: var(--color-background-lighter);
   border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: var(--spacing-lg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .operator-fixed {
