@@ -1,0 +1,15 @@
+# Inherit everything from prod
+-r requirements-prod.txt
+
+# ── Tests ─────────────────────────────────────────────────────────
+pytest==9.0.2
+httpx==0.28.1          # already in prod but needed explicitly for TestClient
+
+# ── Linting / Formatting ──────────────────────────────────────────
+black==26.1.0
+flake8==7.3.0
+isort==7.0.0
+mypy==1.19.1
+
+# ── Dev utilities ─────────────────────────────────────────────────
+watchfiles==1.1.1      # hot reload in dev (uvicorn --reload)
