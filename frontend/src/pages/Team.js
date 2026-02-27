@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import DataPanel from '../components/DataPanel';
-import { ChevronDown, ChevronUp, User, Target, Lightbulb, Award } from 'lucide-react';
+import { ChevronDown, ChevronUp, Target, Lightbulb, Award } from 'lucide-react';
 
 const teamMembers = [
   {
     id: 'lucas',
     name: 'Lucas Ansel',
-    role: 'Digital Strategy & Industrial Web Architecture',
+    role: 'Founder & Strategic Architect',
+    photo: 'https://i.ibb.co/N6Td5161/Untitled-design-5.png',
     description: 'Specializes in digital strategy applied to industrial contexts. Lucas architects web ecosystems that function as decision support systems, not marketing tools. His approach combines deep understanding of industrial decision-making with modern digital infrastructure.',
     decisionScope: 'Digital infrastructure strategy, website architecture, content systems, decision pathway optimization.',
     contribution: 'System architecture design, decision-grade website frameworks, industrial content strategy, measurement protocols.',
@@ -17,6 +18,7 @@ const teamMembers = [
     id: 'ayoub',
     name: 'Ayoub Bouzalmad',
     role: 'Technical Implementation & Data Systems',
+    photo: 'https://i.ibb.co/gZS47BmH/Untitled-design-6.png',
     description: 'Brings technical depth to industrial digital projects. Ayoub ensures that strategic concepts translate into robust, scalable implementations. His focus is on data integrity, system reliability, and technical excellence.',
     decisionScope: 'Technical architecture, data systems, implementation quality, system integration.',
     contribution: 'Backend development, data pipeline design, API architecture, quality assurance, technical documentation.',
@@ -26,6 +28,7 @@ const teamMembers = [
     id: 'david',
     name: 'David Ansel',
     role: 'Industrial Operations & Strategic Advisory',
+    photo: 'https://i.ibb.co/DDKhbt2R/Untitled-design-7.png',
     description: 'Decades of experience in industrial operations provide the foundation for strategic credibility. David bridges the gap between digital capabilities and real-world industrial constraints, ensuring solutions are grounded in operational reality.',
     decisionScope: 'Industrial operations, strategic positioning, stakeholder alignment, operational feasibility.',
     contribution: 'Operational insight, industry credibility, strategic validation, stakeholder communication, risk assessment.',
@@ -43,8 +46,8 @@ const TeamMemberCard = ({ member, isExpanded, onToggle }) => {
         tabIndex={0}
         onKeyDown={(e) => e.key === 'Enter' && onToggle()}
       >
-        <div className="team-avatar">
-          <User size={32} />
+        <div className="team-avatar-photo">
+          <img src={member.photo} alt={member.name} className="team-photo" />
         </div>
         <div className="team-info">
           <h3 className="team-name">{member.name}</h3>
@@ -59,7 +62,7 @@ const TeamMemberCard = ({ member, isExpanded, onToggle }) => {
         <div className="team-card-content" data-testid={`team-details-${member.id}`}>
           <div className="team-section">
             <div className="team-section-header">
-              <User size={16} className="team-section-icon" />
+              <Target size={16} className="team-section-icon" />
               <h4 className="team-section-title">Description</h4>
             </div>
             <p className="team-section-text">{member.description}</p>
