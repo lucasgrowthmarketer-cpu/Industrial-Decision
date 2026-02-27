@@ -49,7 +49,7 @@ function AppContent() {
           <div className="footer-operator-contact">
             <a href="mailto:lucas.growthmarketer@gmail.com">Lucas Ansel</a>
             <span className="footer-divider">|</span>
-            <a href="mailto:ayoub.bouzalmad@industrialdecision.com">Ayoub Bouzalmad</a>
+            <a href="https://www.linkedin.com/in/ayoub-bouzalmad/" target="_blank" rel="noopener noreferrer">Ayoub Bouzalmad</a>
           </div>
         </div>
         <div className="footer-note">
