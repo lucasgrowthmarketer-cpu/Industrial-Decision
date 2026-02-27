@@ -13,6 +13,7 @@ import ProofBlocks from './pages/ProofBlocks';
 import DecisionGates from './pages/DecisionGates';
 import SourcesMethod from './pages/SourcesMethod';
 import DecisionAmplifiers from './pages/DecisionAmplifiers';
+import Team from './pages/Team';
 import './App.css';
 
 function AppContent() {
@@ -33,6 +34,7 @@ function AppContent() {
           <Route path="/proof" element={<ProofBlocks />} />
           <Route path="/gates" element={<DecisionGates />} />
           <Route path="/amplifiers" element={<DecisionAmplifiers />} />
+          <Route path="/team" element={<Team />} />
           <Route path="/sources" element={<SourcesMethod />} />
         </Routes>
       </main>
