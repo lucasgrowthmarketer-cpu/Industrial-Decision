@@ -19,20 +19,20 @@ test.describe('Sources & Method Page', () => {
 
   test('Data Sources section displays Banque de France and Altares', async ({ page }) => {
     // Check Data Sources section
-    await expect(page.getByText('Data Sources')).toBeVisible();
-    await expect(page.getByText('Banque de France')).toBeVisible();
-    await expect(page.getByText('Altares')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Data Sources' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Banque de France' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Altares' })).toBeVisible();
     
     // Check badges
-    await expect(page.getByText('Judicial Focus')).toBeVisible();
-    await expect(page.getByText('Commercial Scope')).toBeVisible();
+    await expect(page.getByText('Judicial Focus', { exact: true })).toBeVisible();
+    await expect(page.getByText('Commercial Scope', { exact: true })).toBeVisible();
   });
 
   test('Data Acknowledgment section displays Jean-Baptiste Borron', async ({ page }) => {
     // Check Data Acknowledgment section
-    await expect(page.getByText('Data Acknowledgment')).toBeVisible();
-    await expect(page.getByText('Jean-Baptiste Borron')).toBeVisible();
-    await expect(page.getByText('Industrial Expert')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Data Acknowledgment' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Jean-Baptiste Borron' })).toBeVisible();
+    await expect(page.getByText('Industrial Expert', { exact: true })).toBeVisible();
   });
 
   test('Data Acknowledgment section displays ALMA Machines outils', async ({ page }) => {
@@ -68,7 +68,7 @@ test.describe('Sources & Method Page', () => {
     
     // Check French content
     await expect(page.getByRole('heading', { name: 'Sources & Méthode' })).toBeVisible({ timeout: 5000 });
-    await expect(page.getByText('Sources de Données')).toBeVisible();
-    await expect(page.getByText('Reconnaissance des Données')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Sources de Données' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Reconnaissance des Données' })).toBeVisible();
   });
 });
