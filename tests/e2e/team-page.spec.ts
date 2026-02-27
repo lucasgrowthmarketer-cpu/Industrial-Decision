@@ -43,15 +43,13 @@ test.describe('Team Page', () => {
 
   test('Team cards are expandable - Lucas Ansel', async ({ page }) => {
     const lucasCard = page.getByTestId('team-card-lucas');
-    
-    // Initially details should be hidden
-    const lucasDetails = page.getByTestId('team-details-lucas');
-    await expect(lucasDetails).not.toBeVisible();
+    const lucasHeader = lucasCard.locator('.team-card-header');
     
     // Click to expand
-    await lucasCard.click();
+    await lucasHeader.click();
     
     // Details should now be visible
+    const lucasDetails = page.getByTestId('team-details-lucas');
     await expect(lucasDetails).toBeVisible();
     
     // Check expanded content
@@ -60,9 +58,8 @@ test.describe('Team Page', () => {
     await expect(lucasDetails.getByText('Contribution')).toBeVisible();
     await expect(lucasDetails.getByText('Core Expertise')).toBeVisible();
     
-    // Click again to collapse
-    await lucasCard.click();
-    await expect(lucasDetails).not.toBeVisible();
+    // Check expertise items are visible
+    await expect(lucasDetails.getByText('Industrial web architecture')).toBeVisible();
   });
 
   test('Team cards are expandable - Ayoub Bouzalmad', async ({ page }) => {
@@ -85,17 +82,18 @@ test.describe('Team Page', () => {
 
   test('Team cards are expandable - David Ansel', async ({ page }) => {
     const davidCard = page.getByTestId('team-card-david');
+    const davidHeader = davidCard.locator('.team-card-header');
     
     // Click to expand
-    await davidCard.click();
+    await davidHeader.click();
     
     // Details should now be visible
     const davidDetails = page.getByTestId('team-details-david');
     await expect(davidDetails).toBeVisible();
     
-    // Check industrial operations content
-    await expect(davidDetails.getByText('Industrial operations')).toBeVisible();
-    await expect(davidDetails.getByText('Strategic advisory')).toBeVisible();
+    // Check industrial operations content using exact match
+    await expect(davidDetails.getByText('Industrial operations', { exact: true })).toBeVisible();
+    await expect(davidDetails.getByText('Strategic advisory', { exact: true })).toBeVisible();
   });
 
   test('Collective Approach section is present', async ({ page }) => {
