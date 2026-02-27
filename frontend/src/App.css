@@ -3,18 +3,18 @@
 
 /* Design Tokens - Industrial Decision Interface */
 :root {
-  /* Colors - New Design Refresh */
-  --color-background: #1a1f2e;
-  --color-background-darker: #0f1320;
-  --color-background-lighter: #252b3d;
+  /* Colors - Light Theme for Professional Consulting Look */
+  --color-background: #F5F7FA;
+  --color-background-darker: #E8ECF0;
+  --color-background-lighter: #FFFFFF;
   --color-accent: #207BFF;
   --color-accent-hover: #4EA5FF;
   --color-accent-dark: #1565d8;
-  --color-text: #F5F7FA;
-  --color-text-secondary: #b8c4d6;
-  --color-text-muted: #8096b8;
-  --color-border: #2d3548;
-  --color-border-light: #3d4560;
+  --color-text: #1a1f2e;
+  --color-text-secondary: #4a5568;
+  --color-text-muted: #718096;
+  --color-border: #e0e4e8;
+  --color-border-light: #d0d5dd;
   
   /* Status colors */
   --color-success: #5fa05f;
