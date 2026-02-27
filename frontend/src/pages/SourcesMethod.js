@@ -2,10 +2,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import DataPanel from '../components/DataPanel';
 import Badge from '../components/Badge';
-import { Database, Target, Activity } from 'lucide-react';
+import { Database, Target, Activity, Users } from 'lucide-react';
 
 const SourcesMethod = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
   
   return (
     <div className="page-container" data-testid="sources-method-page">
@@ -38,6 +39,37 @@ const SourcesMethod = () => {
         <div className="source-note">
           <Badge variant="warning">{t('sourcesMethod.methodologicalNote')}</Badge>
           <p className="note-text">{t('sourcesMethod.methodNoteText')}</p>
+        </div>
+      </DataPanel>
+
+      {/* New Data Acknowledgment Section */}
+      <DataPanel title={lang === 'fr' ? 'Reconnaissance des Données' : 'Data Acknowledgment'} className="mb-6">
+        <div className="sources-grid">
+          <div className="source-card">
+            <div className="source-header">
+              <Users size={24} className="source-icon" />
+              <h3 className="source-title">Jean-Baptiste Borron</h3>
+            </div>
+            <p className="source-description">
+              {lang === 'fr' 
+                ? 'Expertise et insights industriels contribuant à la validation des scénarios décisionnels et à la crédibilité opérationnelle du système.'
+                : 'Industrial expertise and insights contributing to decision scenario validation and system operational credibility.'}
+            </p>
+            <Badge variant="success">{lang === 'fr' ? 'Expert Industriel' : 'Industrial Expert'}</Badge>
+          </div>
+
+          <div className="source-card">
+            <div className="source-header">
+              <Database size={24} className="source-icon" />
+              <h3 className="source-title">ALMA Machines outils</h3>
+            </div>
+            <p className="source-description">
+              {lang === 'fr' 
+                ? 'Données et expérience opérationnelle du secteur machines-outils enrichissant les benchmarks et analyses sectorielles.'
+                : 'Machine tool sector data and operational experience enriching benchmarks and sector analyses.'}
+            </p>
+            <Badge variant="success">{lang === 'fr' ? 'Partenaire Données' : 'Data Partner'}</Badge>
+          </div>
         </div>
       </DataPanel>
 
