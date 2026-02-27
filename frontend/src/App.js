@@ -47,9 +47,9 @@ function AppContent() {
           <div className="footer-operator-name">{t('footer.operatorName')}</div>
           <div className="footer-operator-subtitle">{t('footer.operatorSubtitle')}</div>
           <div className="footer-operator-contact">
-            <a href="mailto:lucas.growthmarketer@gmail.com">lucas.growthmarketer@gmail.com</a>
+            <a href="mailto:lucas.growthmarketer@gmail.com">Lucas Ansel</a>
             <span className="footer-divider">|</span>
-            <a href="https://wa.me/33611752581" target="_blank" rel="noopener noreferrer">WhatsApp: +33 6 11 75 25 81</a>
+            <a href="mailto:ayoub.bouzalmad@industrialdecision.com">Ayoub Bouzalmad</a>
           </div>
         </div>
         <div className="footer-note">
