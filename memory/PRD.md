@@ -15,7 +15,7 @@ Build a sophisticated web application called "Industrial Decision Interface" - a
 - Central canvas for content
 - Right column for Operator Panel
 
-### Modules (10 Pages)
+### Modules (11 Pages)
 1. **System Status** - Executive framing of decision context
 2. **COMEX Overview** - Executive summary answering "What does this prove?"
 3. **Market Pressure** - Industrial stress indicators with France choropleth map
@@ -23,98 +23,62 @@ Build a sophisticated web application called "Industrial Decision Interface" - a
 5. **Decision Scenarios** - Real operational situations leaders face
 6. **Process Visibility** - End-to-end operational clarity
 7. **Proof Blocks** - Anonymized operational signals
-8. **Decision Gates** - Contextual contact entry points
-9. **Decision Amplifiers** - Four-layer system architecture (NEW)
-10. **Sources & Method** - Transparency and governance
+8. **Decision Gates** - Contextual contact entry points (4 gates + introduction form)
+9. **Decision Amplifiers** - Four-layer system architecture
+10. **Team** - Core team members (Lucas Ansel, Ayoub Bouzalmad, David Ansel)
+11. **Sources & Method** - Transparency and governance
 
 ### Key Features
 - ✅ Full EN/FR translation with language toggle
 - ✅ All data embedded locally (no external API dependencies)
-- ✅ LinkedIn link for operator
+- ✅ LinkedIn link for operators
 - ✅ Operator Panel always visible
+- ✅ SMTP contact form integration
 
 ## Tech Stack
 - **Frontend**: React.js (create-react-app)
+- **Backend**: FastAPI (Python)
 - **Routing**: React Router
 - **Data Visualization**: D3.js, React-Simple-Maps
 - **Internationalization**: react-i18next
-- **Styling**: CSS (mission control dark theme)
+- **Styling**: CSS (mission control dark theme with blue accent #207BFF)
+- **Email**: aiosmtplib (SMTP via OVH)
 
-## File Structure
-```
-/app/frontend/src/
-├── i18n/
-│   ├── config.js
-│   └── locales/
-│       ├── en.json
-│       └── fr.json
-├── components/
-│   ├── Sidebar.js (with language toggle)
-│   ├── OperatorPanel.js
-│   ├── DataPanel.js
-│   ├── Badge.js
-│   └── KPIWidget.js
-├── pages/
-│   ├── SystemStatus.js
-│   ├── COMEXOverview.js
-│   ├── MarketPressure.js
-│   ├── DecisionReadiness.js
-│   ├── DecisionScenarios.js
-│   ├── ProcessVisibility.js
-│   ├── ProofBlocks.js
-│   ├── DecisionGates.js
-│   ├── DecisionAmplifiers/ (NEW)
-│   │   ├── index.js
-│   │   ├── DecisionAmplifiers.js
-│   │   ├── ArchitectureMap.js
-│   │   ├── VisibilityLayer.js
-│   │   ├── TrustLayer.js
-│   │   ├── ActivationLayer.js
-│   │   └── SystemCoherenceIndex.js
-│   └── SourcesMethod.js
-└── data/
-    ├── industrial_pressure.js
-    ├── oem_audit.js
-    ├── scenarios.js
-    ├── process_flows.js
-    ├── proof_blocks.js
-    ├── decision_gates.js
-    └── decisionAmplifiersData.js (NEW)
-```
+## Design System
+- **Primary Color**: #207BFF
+- **Accent Color**: #4EA5FF
+- **Background Colors**: #1a1f2e, #0f1320, #252b3d
+- **Text Color**: #F5F7FA
+- **Font**: Manrope
 
-## What's Implemented (Dec 9, 2025)
-- ✅ Full 10-page application with all modules
-- ✅ Mission control dark theme styling
+## What's Implemented (Feb 27, 2026)
+
+### Latest Updates ✅
+- **Design Refresh**: New blue color palette (#207BFF), new logo, new slogan "Engineering Better Decisions"
+- **Team Page**: New page with 3 expandable member cards (Lucas, Ayoub, David)
+- **Decision Gates Rewrite**: Complete rewrite with 4 contextual gates + introduction contact form
+- **Backend Contact API**: FastAPI endpoint `/api/contact` with SMTP email sending
+- **Sources & Method Update**: Added Jean-Baptiste Borron & ALMA Machines outils acknowledgments
+- **Footer Update**: Changed to "Industrial Decision" company name, dual contacts display
+
+### Core Features ✅
+- ✅ Full 11-page application with all modules
+- ✅ Mission control dark theme with blue accent
 - ✅ Complete EN/FR translation system with react-i18next
 - ✅ Language toggle in sidebar with localStorage persistence
-- ✅ All translation keys for all 10 pages (EN and FR)
-- ✅ Operator Panel with contact info and LinkedIn link
+- ✅ All translation keys for all pages (EN and FR)
+- ✅ Operator Panel with both contacts (Lucas & Ayoub)
 - ✅ Footer with operator information
 - ✅ Responsive sidebar navigation
 - ✅ Data visualizations (KPI widgets, charts, tables)
 - ✅ France choropleth map for Market Pressure
-- ✅ **NEW: Decision Amplifiers module with:**
-  - Four-layer architecture map (Infrastructure, Visibility, Trust, Activation)
-  - Intent Clusters with urgency levels (U3-U5)
-  - Network Decision Metrics (6.8 decision makers, 4 touchpoints, 21 days, 3.4% engagement)
-  - Reference Sources (Edelman, LinkedIn B2B Institute, Gartner)
-  - Activation Logic Chain (4 steps)
-  - System Coherence Index (SCI) gauge with component breakdown
-  - Governance Principles (4 rules)
-  - Full EN/FR translations
+- ✅ Decision Amplifiers module with four-layer architecture
 
-## Test Results
-- **Translation System**: 100% pass rate (all 10 pages)
-- **Decision Amplifiers Module**: 100% pass rate (13/13 tests)
-- **Language Toggle**: Working correctly on all pages
-- **SCI Calculation**: Working correctly (weighted composite)
-
-## Indices Defined
-| Index | Name | Description |
-|-------|------|-------------|
-| DRS | Decision Readiness Score | 0-4 score for website decision support |
-| URI | Uncertainty Reduction Index | Visitor pathway completion % |
-| SCI | System Coherence Index | Weighted composite (0-100) of DRS, URI, Intent Coverage, Trust Signal, Activation Readiness |
+## Test Results (Feb 27, 2026)
+- **Backend**: 100% pass rate (5/5 tests passed)
+- **Frontend**: 100% pass rate (30/30 tests passed)
+- **Translation System**: Working correctly on all pages
+- **Contact Form API**: Working (sends emails via SMTP)
 
 ## Routes
 | Path | Page |
@@ -127,8 +91,17 @@ Build a sophisticated web application called "Industrial Decision Interface" - a
 | `/process` | Process Visibility |
 | `/proof` | Proof Blocks |
 | `/gates` | Decision Gates |
-| `/amplifiers` | Decision Amplifiers (NEW) |
+| `/amplifiers` | Decision Amplifiers |
+| `/team` | Team |
 | `/sources` | Sources & Method |
+
+## API Endpoints
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/` | Health check |
+| GET | `/api/status` | Get status checks |
+| POST | `/api/status` | Create status check |
+| POST | `/api/contact` | Submit contact form (sends email via SMTP) |
 
 ## Future Tasks (P2 - Optional)
 - Extend benchmarks to additional OEMs or countries
