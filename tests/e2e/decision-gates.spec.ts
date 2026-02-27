@@ -33,7 +33,7 @@ test.describe('Decision Gates Page', () => {
   test('Discreet Gate content is correct', async ({ page }) => {
     const discreetGate = page.getByTestId('gate-card-discreet');
     
-    await expect(discreetGate.getByText('Discreet Gate')).toBeVisible();
+    await expect(discreetGate.getByRole('heading', { name: 'Discreet Gate' })).toBeVisible();
     await expect(discreetGate.getByText('Confidential strategic assessment')).toBeVisible();
     await expect(discreetGate.getByText('48–72 hours')).toBeVisible();
     await expect(discreetGate.getByText('Secure email or private call')).toBeVisible();
@@ -42,21 +42,21 @@ test.describe('Decision Gates Page', () => {
   test('Exploratory Gate content is correct', async ({ page }) => {
     const exploratoryGate = page.getByTestId('gate-card-exploratory');
     
-    await expect(exploratoryGate.getByText('Exploratory Gate')).toBeVisible();
+    await expect(exploratoryGate.getByRole('heading', { name: 'Exploratory Gate' })).toBeVisible();
     await expect(exploratoryGate.getByText('3–5 business days')).toBeVisible();
   });
 
   test('Urgent Gate content is correct', async ({ page }) => {
     const urgentGate = page.getByTestId('gate-card-urgent');
     
-    await expect(urgentGate.getByText('Urgent Gate')).toBeVisible();
+    await expect(urgentGate.getByRole('heading', { name: 'Urgent Gate' })).toBeVisible();
     await expect(urgentGate.getByText('12–24h initial contact')).toBeVisible();
   });
 
   test('Post-Crisis Gate content is correct', async ({ page }) => {
     const postcrisisGate = page.getByTestId('gate-card-postcrisis');
     
-    await expect(postcrisisGate.getByText('Post-Crisis Gate')).toBeVisible();
+    await expect(postcrisisGate.getByRole('heading', { name: 'Post-Crisis Gate' })).toBeVisible();
     await expect(postcrisisGate.getByText('2–3 business days')).toBeVisible();
   });
 
