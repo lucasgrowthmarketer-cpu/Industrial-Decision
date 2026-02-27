@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Mail, Phone, Linkedin, User } from 'lucide-react';
+import { Mail, Phone, Linkedin } from 'lucide-react';
 
 const OperatorPanel = ({ className }) => {
   const { t } = useTranslation();
@@ -43,10 +43,6 @@ const OperatorPanel = ({ className }) => {
         <p className="operator-title">Technical Implementation & Data Systems</p>
         
         <div className="operator-contact">
-          <a href="mailto:ayoub.bouzalmad@industrialdecision.com" className="contact-item" data-testid="operator2-email-link">
-            <Mail size={16} />
-            <span>ayoub.bouzalmad@industrialdecision.com</span>
-          </a>
           <a href="https://www.linkedin.com/in/ayoub-bouzalmad/" className="contact-item" data-testid="operator2-linkedin-link" target="_blank" rel="noopener noreferrer">
             <Linkedin size={16} />
             <span>{t('operator.linkedin')}</span>
