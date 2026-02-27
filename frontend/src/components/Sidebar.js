@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Activity, Database, Target, FileText, GitBranch, Shield, DoorOpen, BookOpen, Layers, Globe, Zap } from 'lucide-react';
+import { Activity, Database, Target, FileText, GitBranch, Shield, DoorOpen, BookOpen, Layers, Globe, Zap, Users } from 'lucide-react';
 
 const Sidebar = () => {
   const { t, i18n } = useTranslation();
@@ -17,6 +17,7 @@ const Sidebar = () => {
     { path: '/proof', label: t('sidebar.proofBlocks'), icon: Shield },
     { path: '/gates', label: t('sidebar.decisionGates'), icon: DoorOpen },
     { path: '/amplifiers', label: t('sidebar.decisionAmplifiers'), icon: Zap },
+    { path: '/team', label: t('sidebar.team'), icon: Users },
     { path: '/sources', label: t('sidebar.sourcesMethod'), icon: BookOpen }
   ];
 
@@ -30,9 +31,12 @@ const Sidebar = () => {
   return (
     <nav className="sidebar" data-testid="main-sidebar">
       <div className="sidebar-header">
-        <h1 className="sidebar-title">{t('sidebar.title').split(' ').map((word, i) => (
-          <React.Fragment key={i}>{word}<br/></React.Fragment>
-        ))}</h1>
+        <img 
+          src="https://i.ibb.co/wNCQpWYW/Image-26-02-2026-a-21-05.jpg" 
+          alt="Industrial Decision" 
+          className="sidebar-logo"
+          data-testid="sidebar-logo"
+        />
         <div className="system-version">{t('sidebar.version')}</div>
       </div>
       
