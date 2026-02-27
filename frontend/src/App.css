@@ -285,6 +285,12 @@ body {
   gap: var(--spacing-sm);
 }
 
+.operator-separator {
+  height: 1px;
+  background-color: var(--color-border);
+  margin: var(--spacing-lg) 0;
+}
+
 .operator-name {
   font-size: var(--font-size-lg);
   font-weight: 700;
