@@ -2,8 +2,224 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import DataPanel from '../components/DataPanel';
 import Badge from '../components/Badge';
-import { decisionGates } from '../data/decision_gates';
-import { Clock, Mail, CheckCircle } from 'lucide-react';
+import { Clock, Mail, CheckCircle, Shield, Compass, AlertTriangle, Anchor, Send } from 'lucide-react';
+
+const decisionGates = [
+  {
+    id: 'discreet',
+    icon: Shield,
+    title: 'Discreet Gate',
+    titleFr: 'Porte Discrète',
+    subtitle: 'Confidential strategic assessment',
+    subtitleFr: 'Évaluation stratégique confidentielle',
+    description: 'For leaders evaluating sensitive industrial decisions.',
+    descriptionFr: 'Pour les dirigeants évaluant des décisions industrielles sensibles.',
+    responseTime: '48–72 hours',
+    responseTimeFr: '48–72 heures',
+    exchangeFormat: 'Secure email or private call',
+    exchangeFormatFr: 'Email sécurisé ou appel privé',
+    bestFor: [
+      'Evaluating a potential machine tool investment',
+      'Confidential strategic review',
+      'Preliminary board-level positioning'
+    ],
+    bestForFr: [
+      'Évaluation d\'un investissement potentiel en machine-outil',
+      'Revue stratégique confidentielle',
+      'Positionnement préliminaire au niveau du conseil'
+    ],
+    whatYouReceive: [
+      'Initial structured assessment',
+      'Confidential handling protocol',
+      'No obligation or engagement requirement'
+    ],
+    whatYouReceiveFr: [
+      'Évaluation structurée initiale',
+      'Protocole de traitement confidentiel',
+      'Aucune obligation ni exigence d\'engagement'
+    ],
+    variant: 'warning'
+  },
+  {
+    id: 'exploratory',
+    icon: Compass,
+    title: 'Exploratory Gate',
+    titleFr: 'Porte Exploratoire',
+    subtitle: 'Structured feasibility & options review',
+    subtitleFr: 'Revue structurée de faisabilité et options',
+    description: 'For leaders needing clarity before internal commitment.',
+    descriptionFr: 'Pour les dirigeants ayant besoin de clarté avant engagement interne.',
+    responseTime: '3–5 business days',
+    responseTimeFr: '3–5 jours ouvrés',
+    exchangeFormat: 'Video session or structured documentation',
+    exchangeFormatFr: 'Session vidéo ou documentation structurée',
+    bestFor: [
+      'Comparing industrial strategies',
+      'Assessing workshop evolution scenarios',
+      'Building internal decision cases'
+    ],
+    bestForFr: [
+      'Comparaison de stratégies industrielles',
+      'Évaluation de scénarios d\'évolution d\'atelier',
+      'Construction de dossiers de décision internes'
+    ],
+    whatYouReceive: [
+      'Structured options overview',
+      'Process & timeline clarity',
+      'Scenario modeling support'
+    ],
+    whatYouReceiveFr: [
+      'Vue d\'ensemble structurée des options',
+      'Clarté sur le processus et les délais',
+      'Support de modélisation de scénarios'
+    ],
+    variant: 'info'
+  },
+  {
+    id: 'urgent',
+    icon: AlertTriangle,
+    title: 'Urgent Gate',
+    titleFr: 'Porte Urgente',
+    subtitle: 'Time-critical industrial response',
+    subtitleFr: 'Réponse industrielle critique en temps',
+    description: 'For situations where delay increases risk.',
+    descriptionFr: 'Pour les situations où le retard augmente le risque.',
+    responseTime: '12–24h initial contact',
+    responseTimeFr: 'Contact initial sous 12–24h',
+    exchangeFormat: 'Direct call + rapid documentation',
+    exchangeFormatFr: 'Appel direct + documentation rapide',
+    bestFor: [
+      'Critical operational disruption',
+      'Investment deadlines',
+      'Financial or restructuring pressure'
+    ],
+    bestForFr: [
+      'Perturbation opérationnelle critique',
+      'Échéances d\'investissement',
+      'Pression financière ou de restructuration'
+    ],
+    whatYouReceive: [
+      'Immediate situation triage',
+      'Rapid assessment pathway',
+      'Accelerated execution framework'
+    ],
+    whatYouReceiveFr: [
+      'Triage immédiat de la situation',
+      'Parcours d\'évaluation rapide',
+      'Cadre d\'exécution accéléré'
+    ],
+    variant: 'error'
+  },
+  {
+    id: 'postcrisis',
+    icon: Anchor,
+    title: 'Post-Crisis Gate',
+    titleFr: 'Porte Post-Crise',
+    subtitle: 'Stabilization & structured recovery',
+    subtitleFr: 'Stabilisation et récupération structurée',
+    description: 'For industrial environments requiring restructuring clarity.',
+    descriptionFr: 'Pour les environnements industriels nécessitant une clarté de restructuration.',
+    responseTime: '2–3 business days',
+    responseTimeFr: '2–3 jours ouvrés',
+    exchangeFormat: 'Strategic session + structured documentation',
+    exchangeFormatFr: 'Session stratégique + documentation structurée',
+    bestFor: [
+      'Post-restructuring asset review',
+      'Operational recovery planning',
+      'Portfolio rationalization'
+    ],
+    bestForFr: [
+      'Revue des actifs post-restructuration',
+      'Planification de la récupération opérationnelle',
+      'Rationalisation du portefeuille'
+    ],
+    whatYouReceive: [
+      'Comprehensive environment assessment',
+      'Multi-scenario planning',
+      'Phased stabilization roadmap'
+    ],
+    whatYouReceiveFr: [
+      'Évaluation complète de l\'environnement',
+      'Planification multi-scénarios',
+      'Feuille de route de stabilisation par phases'
+    ],
+    variant: 'success'
+  }
+];
+
+const GateCard = ({ gate, lang, onEnter }) => {
+  const Icon = gate.icon;
+  const title = lang === 'fr' ? gate.titleFr : gate.title;
+  const subtitle = lang === 'fr' ? gate.subtitleFr : gate.subtitle;
+  const description = lang === 'fr' ? gate.descriptionFr : gate.description;
+  const responseTime = lang === 'fr' ? gate.responseTimeFr : gate.responseTime;
+  const exchangeFormat = lang === 'fr' ? gate.exchangeFormatFr : gate.exchangeFormat;
+  const bestFor = lang === 'fr' ? gate.bestForFr : gate.bestFor;
+  const whatYouReceive = lang === 'fr' ? gate.whatYouReceiveFr : gate.whatYouReceive;
+
+  return (
+    <div className="gate-card" data-testid={`gate-card-${gate.id}`}>
+      <div className="gate-card-header">
+        <div className="gate-icon-wrapper">
+          <Icon size={24} />
+        </div>
+        <div>
+          <h3 className="gate-title">{title}</h3>
+          <Badge variant={gate.variant}>{subtitle}</Badge>
+        </div>
+      </div>
+
+      <p className="gate-description">{description}</p>
+
+      <div className="gate-details">
+        <div className="gate-detail-item">
+          <Clock size={16} className="detail-icon" />
+          <div>
+            <span className="detail-label">{lang === 'fr' ? 'Délai de réponse' : 'Response timeframe'}</span>
+            <span className="detail-value">{responseTime}</span>
+          </div>
+        </div>
+
+        <div className="gate-detail-item">
+          <Mail size={16} className="detail-icon" />
+          <div>
+            <span className="detail-label">{lang === 'fr' ? 'Format d\'échange' : 'Exchange format'}</span>
+            <span className="detail-value">{exchangeFormat}</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="gate-section">
+        <h4 className="gate-section-title">{lang === 'fr' ? 'Idéal pour' : 'Best suited for'}</h4>
+        <ul className="gate-list">
+          {bestFor.map((item, index) => (
+            <li key={index} className="gate-list-item">
+              <CheckCircle size={14} className="list-check" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="gate-section">
+        <h4 className="gate-section-title">{lang === 'fr' ? 'Ce que vous recevez' : 'What you receive'}</h4>
+        <ul className="gate-list small">
+          {whatYouReceive.map((item, index) => (
+            <li key={index} className="gate-list-item-small">{item}</li>
+          ))}
+        </ul>
+      </div>
+
+      <button
+        className="gate-button"
+        onClick={() => onEnter(gate)}
+        data-testid={`gate-enter-btn-${gate.id}`}
+      >
+        → {lang === 'fr' ? `Entrer via ${gate.titleFr}` : `Enter via ${gate.title}`}
+      </button>
+    </div>
+  );
+};
 
 const DecisionGates = () => {
   const { t, i18n } = useTranslation();
@@ -13,27 +229,86 @@ const DecisionGates = () => {
     name: '',
     company: '',
     email: '',
-    phone: '',
     context: '',
-    message: ''
+    preferred_contact: 'email'
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setSelectedGate(null);
-      setFormData({
-        name: '',
-        company: '',
-        email: '',
-        phone: '',
-        context: '',
-        message: ''
+    setLoading(true);
+    setError(null);
+
+    try {
+      const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
+      const response = await fetch(`${backendUrl}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-    }, 3000);
+
+      if (!response.ok) {
+        throw new Error('Failed to submit request');
+      }
+
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setSelectedGate(null);
+        setFormData({
+          name: '',
+          company: '',
+          email: '',
+          context: '',
+          preferred_contact: 'email'
+        });
+      }, 4000);
+    } catch (err) {
+      setError(lang === 'fr' ? 'Une erreur est survenue. Veuillez réessayer.' : 'An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleIntroductionSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
+      const response = await fetch(`${backendUrl}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit request');
+      }
+
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({
+          name: '',
+          company: '',
+          email: '',
+          context: '',
+          preferred_contact: 'email'
+        });
+      }, 4000);
+    } catch (err) {
+      setError(lang === 'fr' ? 'Une erreur est survenue. Veuillez réessayer.' : 'An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -44,71 +319,38 @@ const DecisionGates = () => {
       </div>
 
       <DataPanel className="mb-6">
-        <p className="intro-text">{t('decisionGates.intro')}</p>
+        <div className="gates-intro">
+          <p className="intro-text" style={{ marginBottom: 'var(--spacing-lg)' }}>
+            {lang === 'fr' 
+              ? 'Les décisions industrielles ne se prennent pas dans les mêmes conditions.'
+              : 'Industrial decisions do not happen in the same conditions.'}
+          </p>
+          <div className="intro-points">
+            <p className="intro-point">{lang === 'fr' ? 'Certaines nécessitent de la discrétion.' : 'Some require discretion.'}</p>
+            <p className="intro-point">{lang === 'fr' ? 'Certaines nécessitent de l\'exploration.' : 'Some require exploration.'}</p>
+            <p className="intro-point">{lang === 'fr' ? 'Certaines nécessitent de la rapidité.' : 'Some require speed.'}</p>
+            <p className="intro-point">{lang === 'fr' ? 'Certaines nécessitent de la stabilisation.' : 'Some require stabilization.'}</p>
+          </div>
+          <p className="info-text" style={{ marginTop: 'var(--spacing-lg)' }}>
+            {lang === 'fr'
+              ? 'Nous n\'utilisons pas de formulaires de contact génériques. Chaque point d\'entrée est aligné avec votre contexte décisionnel.'
+              : 'We do not use generic contact forms. Each entry point is aligned with your decision context.'}
+          </p>
+        </div>
       </DataPanel>
 
       <div className="gates-grid">
         {decisionGates.map((gate) => (
-          <div key={gate.id} className="gate-card" data-testid="gate-card">
-            <div className="gate-card-header">
-              <h3 className="gate-title">{lang === 'fr' ? gate.titleFr : gate.title}</h3>
-              <Badge variant={gate.id === 'urgent' ? 'error' : gate.id === 'discreet' ? 'warning' : 'info'}>
-                {lang === 'fr' ? gate.badgeFr : gate.badge}
-              </Badge>
-            </div>
-
-            <p className="gate-description">{lang === 'fr' ? gate.descriptionFr : gate.description}</p>
-
-            <div className="gate-details">
-              <div className="gate-detail-item">
-                <Clock size={16} className="detail-icon" />
-                <div>
-                  <span className="detail-label">{t('decisionGates.responseTimeframe')}</span>
-                  <span className="detail-value">{lang === 'fr' ? gate.responseTimeframeFr : gate.responseTimeframe}</span>
-                </div>
-              </div>
-
-              <div className="gate-detail-item">
-                <Mail size={16} className="detail-icon" />
-                <div>
-                  <span className="detail-label">{t('decisionGates.exchangeFormat')}</span>
-                  <span className="detail-value">{lang === 'fr' ? gate.exchangeFormatFr : gate.exchangeFormat}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="gate-section">
-              <h4 className="gate-section-title">{t('decisionGates.whatHappensNext')}</h4>
-              <ul className="gate-list">
-                {(lang === 'fr' ? gate.whatHappensFr : gate.whatHappens).map((item, index) => (
-                  <li key={index} className="gate-list-item">
-                    <CheckCircle size={14} className="list-check" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="gate-section">
-              <h4 className="gate-section-title">{t('decisionGates.idealFor')}</h4>
-              <ul className="gate-list small">
-                {(lang === 'fr' ? gate.idealForFr : gate.idealFor).map((item, index) => (
-                  <li key={index} className="gate-list-item-small">{item}</li>
-                ))}
-              </ul>
-            </div>
-
-            <button
-              className="gate-button"
-              onClick={() => setSelectedGate(gate)}
-              data-testid={`gate-enter-btn-${gate.id}`}
-            >
-              {t('decisionGates.enterVia')} {lang === 'fr' ? gate.titleFr : gate.title} {t('decisionGates.gate')}
-            </button>
-          </div>
+          <GateCard
+            key={gate.id}
+            gate={gate}
+            lang={lang}
+            onEnter={setSelectedGate}
+          />
         ))}
       </div>
 
+      {/* Gate Modal */}
       {selectedGate && (
         <div className="gate-modal" data-testid="gate-modal">
           <div className="gate-modal-content">
@@ -127,14 +369,11 @@ const DecisionGates = () => {
 
             {!submitted ? (
               <form onSubmit={handleSubmit} className="gate-form" data-testid="gate-entry-form">
-                <div className="form-info">
-                  <Badge variant="info">{t('decisionGates.requiredInfo')}</Badge>
-                  <ul className="form-info-list">
-                    {(lang === 'fr' ? selectedGate.requiredInfoFr : selectedGate.requiredInfo).map((info, index) => (
-                      <li key={index}>{info}</li>
-                    ))}
-                  </ul>
-                </div>
+                {error && (
+                  <div className="form-error">
+                    <Badge variant="error">{error}</Badge>
+                  </div>
+                )}
 
                 <div className="form-group">
                   <label className="form-label">{lang === 'fr' ? 'Nom' : 'Name'} *</label>
@@ -172,18 +411,7 @@ const DecisionGates = () => {
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">{lang === 'fr' ? 'Téléphone' : 'Phone'}</label>
-                  <input
-                    type="tel"
-                    className="form-input"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    data-testid="gate-form-phone"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label">{t('decisionGates.contextTimeline')} *</label>
+                  <label className="form-label">{lang === 'fr' ? 'Contexte décisionnel (1 phrase)' : 'Decision context (1 phrase)'} *</label>
                   <textarea
                     className="form-textarea"
                     value={formData.context}
@@ -195,22 +423,29 @@ const DecisionGates = () => {
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">{t('decisionGates.additionalInfo')}</label>
-                  <textarea
-                    className="form-textarea"
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    rows="4"
-                    data-testid="gate-form-message"
-                  />
+                  <label className="form-label">{lang === 'fr' ? 'Méthode de contact préférée' : 'Preferred contact method'}</label>
+                  <select
+                    className="filter-select"
+                    value={formData.preferred_contact}
+                    onChange={(e) => setFormData({ ...formData, preferred_contact: e.target.value })}
+                    data-testid="gate-form-contact-method"
+                  >
+                    <option value="email">Email</option>
+                    <option value="phone">{lang === 'fr' ? 'Téléphone' : 'Phone'}</option>
+                    <option value="video">{lang === 'fr' ? 'Vidéo' : 'Video call'}</option>
+                  </select>
                 </div>
 
                 <div className="form-footer">
-                  <p className="form-note">
-                    {t('decisionGates.expectedResponse')}: {lang === 'fr' ? selectedGate.responseTimeframeFr : selectedGate.responseTimeframe}
-                  </p>
-                  <button type="submit" className="form-submit" data-testid="gate-form-submit">
-                    {t('decisionGates.submitRequest')} {lang === 'fr' ? selectedGate.titleFr : selectedGate.title}
+                  <button 
+                    type="submit" 
+                    className="form-submit" 
+                    disabled={loading}
+                    data-testid="gate-form-submit"
+                  >
+                    {loading 
+                      ? (lang === 'fr' ? 'Envoi en cours...' : 'Sending...') 
+                      : (lang === 'fr' ? 'Soumettre la demande' : 'Submit Request')}
                   </button>
                 </div>
               </form>
@@ -219,7 +454,7 @@ const DecisionGates = () => {
                 <CheckCircle size={48} className="success-icon" />
                 <h3 className="success-title">{t('decisionGates.requestReceived')}</h3>
                 <p className="success-text">
-                  {t('decisionGates.requestReceivedText')} {lang === 'fr' ? selectedGate.responseTimeframeFr : selectedGate.responseTimeframe}.
+                  {t('decisionGates.requestReceivedText')} {lang === 'fr' ? selectedGate.responseTimeFr : selectedGate.responseTime}.
                 </p>
               </div>
             )}
@@ -227,9 +462,117 @@ const DecisionGates = () => {
         </div>
       )}
 
-      <DataPanel title={t('decisionGates.noGenericForms')}>
-        <p className="reading-text">{t('decisionGates.noGenericFormsText')}</p>
-      </DataPanel>
+      {/* Request Introduction Form */}
+      <div className="contact-form-section" data-testid="introduction-form-section">
+        <div className="contact-form-header">
+          <h2 className="contact-form-title">
+            {lang === 'fr' 
+              ? 'Vous ne savez pas quelle porte correspond à votre situation ?'
+              : 'Not sure which gate fits your situation?'}
+          </h2>
+          <p className="contact-form-subtitle">
+            {lang === 'fr' 
+              ? 'Demandez une introduction structurée directe.'
+              : 'Request a direct structured introduction.'}
+          </p>
+        </div>
+
+        {!submitted ? (
+          <form onSubmit={handleIntroductionSubmit} className="contact-form" data-testid="introduction-form">
+            {error && (
+              <div className="form-group full-width">
+                <Badge variant="error">{error}</Badge>
+              </div>
+            )}
+
+            <div className="form-group">
+              <label className="form-label">{lang === 'fr' ? 'Nom' : 'Name'} *</label>
+              <input
+                type="text"
+                className="form-input"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                required
+                data-testid="intro-form-name"
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">{lang === 'fr' ? 'Entreprise' : 'Company'}</label>
+              <input
+                type="text"
+                className="form-input"
+                value={formData.company}
+                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                data-testid="intro-form-company"
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Email *</label>
+              <input
+                type="email"
+                className="form-input"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                required
+                data-testid="intro-form-email"
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">{lang === 'fr' ? 'Méthode de contact préférée' : 'Preferred contact method'}</label>
+              <select
+                className="filter-select"
+                value={formData.preferred_contact}
+                onChange={(e) => setFormData({ ...formData, preferred_contact: e.target.value })}
+                data-testid="intro-form-contact-method"
+              >
+                <option value="email">Email</option>
+                <option value="phone">{lang === 'fr' ? 'Téléphone' : 'Phone'}</option>
+                <option value="video">{lang === 'fr' ? 'Vidéo' : 'Video call'}</option>
+              </select>
+            </div>
+
+            <div className="form-group full-width">
+              <label className="form-label">{lang === 'fr' ? 'Contexte décisionnel (1 phrase)' : 'Decision context (1 phrase)'} *</label>
+              <textarea
+                className="form-textarea"
+                value={formData.context}
+                onChange={(e) => setFormData({ ...formData, context: e.target.value })}
+                required
+                rows="2"
+                placeholder={lang === 'fr' 
+                  ? 'Décrivez brièvement votre situation...' 
+                  : 'Briefly describe your situation...'}
+                data-testid="intro-form-context"
+              />
+            </div>
+
+            <button 
+              type="submit" 
+              className="form-submit"
+              disabled={loading}
+              data-testid="intro-form-submit"
+            >
+              <Send size={16} style={{ marginRight: '8px' }} />
+              {loading 
+                ? (lang === 'fr' ? 'Envoi en cours...' : 'Sending...') 
+                : (lang === 'fr' ? 'Demander une Introduction' : 'Request Introduction')}
+            </button>
+          </form>
+        ) : (
+          <div className="form-success" data-testid="intro-form-success">
+            <CheckCircle size={48} className="success-icon" />
+            <h3 className="success-title">{lang === 'fr' ? 'Demande Reçue' : 'Request Received'}</h3>
+            <p className="success-text">
+              {lang === 'fr' 
+                ? 'Votre demande a été reçue. Nous vous contacterons sous peu.'
+                : 'Your request has been received. We will contact you shortly.'}
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
