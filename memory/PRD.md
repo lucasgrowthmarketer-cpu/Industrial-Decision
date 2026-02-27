@@ -138,4 +138,4 @@ Build a sophisticated web application called "Industrial Decision Interface" - a
 - Deploy additional localized language versions
 
 ## Preview URL
-https://leadership-ops-hub.preview.emergentagent.com
+https://strategy-desk-26.preview.emergentagent.com
