@@ -49,7 +49,7 @@ const OperatorPanel = ({ className }) => {
       <div className="operator-content">
         <div className="operator-contact">
           <a href="mailto:direction@industrialdecision.com" className="contact-item" data-testid="operator-company-email-link">
-            <Mail size={15} />
+            <Mail size={14} />
             <span>direction@industrialdecision.com</span>
           </a>
         </div>
