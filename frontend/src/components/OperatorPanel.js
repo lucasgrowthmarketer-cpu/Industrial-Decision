@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Mail, Phone, Linkedin } from 'lucide-react';
+import { Mail, Linkedin } from 'lucide-react';
 
 const OperatorPanel = ({ className }) => {
   const { t } = useTranslation();
@@ -19,14 +19,6 @@ const OperatorPanel = ({ className }) => {
         <p className="operator-title">{t('operator.title')}</p>
         
         <div className="operator-contact">
-          <a href="mailto:lucas.growthmarketer@gmail.com" className="contact-item" data-testid="operator-email-link">
-            <Mail size={16} />
-            <span>lucas.growthmarketer@gmail.com</span>
-          </a>
-          <a href="https://wa.me/33611752581" className="contact-item" data-testid="operator-whatsapp-link" target="_blank" rel="noopener noreferrer">
-            <Phone size={16} />
-            <span>+33 6 11 75 25 81</span>
-          </a>
           <a href="https://www.linkedin.com/in/lucas-ansel-growth-hacker/" className="contact-item" data-testid="operator-linkedin-link" target="_blank" rel="noopener noreferrer">
             <Linkedin size={16} />
             <span>{t('operator.linkedin')}</span>
@@ -49,6 +41,20 @@ const OperatorPanel = ({ className }) => {
           </a>
         </div>
       </div>
+
+      {/* Separator */}
+      <div className="operator-separator"></div>
+
+      {/* Company contact */}
+      <div className="operator-content">
+        <div className="operator-contact">
+          <a href="mailto:direction@industrialdecision.com" className="contact-item" data-testid="operator-company-email-link">
+            <Mail size={16} />
+            <span>direction@industrialdecision.com</span>
+          </a>
+        </div>
+      </div>
+
     </div>
   );
 };
