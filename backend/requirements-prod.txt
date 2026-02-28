@@ -16,7 +16,7 @@ pymongo==4.5.0
 dnspython==2.8.0
 
 # ── SMTP (contact form) ───────────────────────────────────────────
-aiosmtplib==5.1.0
+httpx==0.27.0
 
 # ── Async / HTTP internals ────────────────────────────────────────
 anyio==4.12.1
