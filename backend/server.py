@@ -253,14 +253,13 @@ This message was sent via the Industrial Decision Interface contact form.
         message.attach(MIMEText(text_content, "plain"))
         message.attach(MIMEText(html_content, "html"))
 
-        await aiosmtplib.send(
+await aiosmtplib.send(
     message,
     hostname=smtp_host,
     port=smtp_port,
     username=smtp_user,
     password=smtp_pass,
-    use_tls=True if smtp_port == 465 else False,
-    start_tls=True if smtp_port != 465 else False,
+    start_tls=True
 )
 
         # Mark email as sent in DB
