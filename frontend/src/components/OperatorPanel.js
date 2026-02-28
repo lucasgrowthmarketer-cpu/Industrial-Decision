@@ -16,11 +16,11 @@ const OperatorPanel = ({ className }) => {
       {/* Lucas Ansel */}
       <div className="operator-content">
         <h3 className="operator-name">Lucas Ansel</h3>
-        <p className="operator-title">{t('operator.title')}</p>
+        <p className="operator-title">Founder & Strategic Architect</p>
         
         <div className="operator-contact">
           <a href="https://www.linkedin.com/in/lucas-ansel-growth-hacker/" className="contact-item" data-testid="operator-linkedin-link" target="_blank" rel="noopener noreferrer">
-            <Linkedin size={16} />
+            <Linkedin size={15} />
             <span>{t('operator.linkedin')}</span>
           </a>
         </div>
@@ -32,11 +32,11 @@ const OperatorPanel = ({ className }) => {
       {/* Ayoub Bouzalmad */}
       <div className="operator-content">
         <h3 className="operator-name">Ayoub Bouzalmad</h3>
-        <p className="operator-title">Technical Implementation & Data Systems</p>
+        <p className="operator-title">Chief Technology Officer</p>
         
         <div className="operator-contact">
           <a href="https://www.linkedin.com/in/ayoub-bouzalmad/" className="contact-item" data-testid="operator2-linkedin-link" target="_blank" rel="noopener noreferrer">
-            <Linkedin size={16} />
+            <Linkedin size={15} />
             <span>{t('operator.linkedin')}</span>
           </a>
         </div>
@@ -49,7 +49,7 @@ const OperatorPanel = ({ className }) => {
       <div className="operator-content">
         <div className="operator-contact">
           <a href="mailto:direction@industrialdecision.com" className="contact-item" data-testid="operator-company-email-link">
-            <Mail size={16} />
+            <Mail size={15} />
             <span>direction@industrialdecision.com</span>
           </a>
         </div>
