@@ -9,9 +9,7 @@ from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Optional
 import uuid
 from datetime import datetime, timezone, timedelta
-import aiosmtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+import httpx
 from collections import defaultdict
 
 
@@ -119,17 +117,14 @@ async def submit_contact_form(contact: ContactRequest, request: Request):
     await db.leads.insert_one(lead_doc)
     logger.info(f"Lead saved to DB: id={lead_doc['id']} gate={contact.gate_type} email={contact.email}")
 
-    # 4. Send email
+    # 4. Send email via Brevo HTTP API
     try:
-        smtp_host = os.environ.get('SMTP_HOST', 'smtp-relay.brevo.com')
-        smtp_port = int(os.environ.get('SMTP_PORT', 587))
-        smtp_user = os.environ.get('SMTP_USER')
-        smtp_pass = os.environ.get('SMTP_PASS')
+        brevo_api_key = os.environ.get('BREVO_API_KEY')
         to_email = os.environ.get('LEAD_TO_EMAIL', 'direction@industrialdecision.com')
         from_email = os.environ.get('LEAD_FROM_EMAIL', 'direction@industrialdecision.com')
 
-        if not smtp_user or not smtp_pass:
-            logger.error("SMTP credentials not configured")
+        if not brevo_api_key:
+            logger.error("BREVO_API_KEY not configured")
             return ContactResponse(success=True, message="Your request has been received. We will contact you shortly.")
 
         gate_labels = {
@@ -140,25 +135,6 @@ async def submit_contact_form(contact: ContactRequest, request: Request):
             "introduction": "Direct Introduction",
         }
         gate_label = gate_labels.get(contact.gate_type or "introduction", contact.gate_type or "Introduction")
-
-        message = MIMEMultipart("alternative")
-        message["From"] = from_email
-        message["To"] = to_email
-        message["Subject"] = f"[Industrial Decision] Gate: {gate_label} — Request from {contact.name}"
-
-        text_content = f"""
-New Contact Request - Industrial Decision Interface
-
-Gate: {gate_label}
-Name: {contact.name}
-Company: {contact.company}
-Email: {contact.email}
-Decision Context: {contact.context}
-Preferred Contact Method: {contact.preferred_contact}
-
----
-This message was sent via the Industrial Decision Interface contact form.
-        """
 
         gate_colors = {
             "discreet":     "#d9a041",
@@ -226,26 +202,48 @@ This message was sent via the Industrial Decision Interface contact form.
 </html>
         """
 
-        message.attach(MIMEText(text_content, "plain"))
-        message.attach(MIMEText(html_content, "html"))
+        text_content = f"""
+New Contact Request - Industrial Decision Interface
 
-        await aiosmtplib.send(
-            message,
-            hostname=smtp_host,
-            port=smtp_port,
-            username=smtp_user,
-            password=smtp_pass,
-            start_tls=True
-        )
+Gate: {gate_label}
+Name: {contact.name}
+Company: {contact.company}
+Email: {contact.email}
+Decision Context: {contact.context}
+Preferred Contact Method: {contact.preferred_contact}
+
+---
+This message was sent via the Industrial Decision Interface contact form.
+        """
+
+        payload = {
+            "sender": {"name": "Industrial Decision", "email": from_email},
+            "to": [{"email": to_email}],
+            "subject": f"[Industrial Decision] Gate: {gate_label} — Request from {contact.name}",
+            "htmlContent": html_content,
+            "textContent": text_content,
+        }
+
+        async with httpx.AsyncClient() as http_client:
+            response = await http_client.post(
+                "https://api.brevo.com/v3/smtp/email",
+                headers={
+                    "api-key": brevo_api_key,
+                    "Content-Type": "application/json",
+                },
+                json=payload,
+                timeout=30.0
+            )
+            response.raise_for_status()
 
         await db.leads.update_one(
             {"id": lead_doc["id"]},
             {"$set": {"email_sent": True}}
         )
-        logger.info(f"Email sent successfully for lead id={lead_doc['id']}")
+        logger.info(f"Email sent successfully via Brevo API for lead id={lead_doc['id']}")
 
-    except aiosmtplib.SMTPException as e:
-        logger.error(f"SMTP error for lead id={lead_doc['id']}: {str(e)}")
+    except httpx.HTTPStatusError as e:
+        logger.error(f"Brevo API error for lead id={lead_doc['id']}: {e.response.status_code} - {e.response.text}")
 
     except Exception as e:
         logger.error(f"Unexpected error during email send for lead id={lead_doc['id']}: {str(e)}")
@@ -264,7 +262,5 @@ app.add_middleware(
 )
 
 @app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()
 async def shutdown_db_client():
     client.close()
