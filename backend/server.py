@@ -18,45 +18,32 @@ from collections import defaultdict
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
 
-# MongoDB connection
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-# Create the main app without a prefix
 app = FastAPI()
-
-# Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
-# ── Simple in-memory rate limiter ─────────────────────────────────────────────
-# { ip: [timestamp, timestamp, ...] }
 _rate_limit_store: dict[str, list[datetime]] = defaultdict(list)
-RATE_LIMIT_MAX = int(os.environ.get('RATE_LIMIT_MAX', 5))        # max requests
-RATE_LIMIT_WINDOW = int(os.environ.get('RATE_LIMIT_WINDOW', 60)) # per N seconds
+RATE_LIMIT_MAX = int(os.environ.get('RATE_LIMIT_MAX', 5))
+RATE_LIMIT_WINDOW = int(os.environ.get('RATE_LIMIT_WINDOW', 60))
 
 def _is_rate_limited(ip: str) -> bool:
-    """Return True if this IP has exceeded the rate limit."""
     now = datetime.now(timezone.utc)
     window_start = now - timedelta(seconds=RATE_LIMIT_WINDOW)
-    # Keep only timestamps within the current window
-    _rate_limit_store[ip] = [
-        ts for ts in _rate_limit_store[ip] if ts > window_start
-    ]
+    _rate_limit_store[ip] = [ts for ts in _rate_limit_store[ip] if ts > window_start]
     if len(_rate_limit_store[ip]) >= RATE_LIMIT_MAX:
         return True
     _rate_limit_store[ip].append(now)
     return False
 
-
-# ── Models ────────────────────────────────────────────────────────────────────
 
 class StatusCheck(BaseModel):
     model_config = ConfigDict(extra="ignore")
@@ -73,15 +60,13 @@ class ContactRequest(BaseModel):
     email: str
     context: str
     preferred_contact: Optional[str] = "email"
-    gate_type: Optional[str] = "introduction"   # discreet | exploratory | urgent | postcrisis | introduction
-    website: Optional[str] = None               # honeypot — must stay empty
+    gate_type: Optional[str] = "introduction"
+    website: Optional[str] = None
 
 class ContactResponse(BaseModel):
     success: bool
     message: str
 
-
-# ── Routes ────────────────────────────────────────────────────────────────────
 
 @api_router.get("/")
 async def root():
@@ -106,25 +91,19 @@ async def get_status_checks():
 
 @api_router.post("/contact", response_model=ContactResponse)
 async def submit_contact_form(contact: ContactRequest, request: Request):
-    """Handle contact form submission: honeypot check → rate limit → save to DB → send email."""
 
-    # ── 1. Honeypot check ─────────────────────────────────────────────────────
-    # Real users never fill the hidden `website` field. Bots usually do.
+    # 1. Honeypot
     if contact.website:
         logger.warning(f"Honeypot triggered from email={contact.email}")
-        # Return a fake success so bots don't know they were blocked
         return ContactResponse(success=True, message="Your request has been received. We will contact you shortly.")
 
-    # ── 2. IP rate limit ──────────────────────────────────────────────────────
+    # 2. Rate limit
     client_ip = request.client.host if request.client else "unknown"
     if _is_rate_limited(client_ip):
         logger.warning(f"Rate limit exceeded for IP={client_ip}")
-        raise HTTPException(
-            status_code=429,
-            detail="Too many requests. Please wait a moment before trying again."
-        )
+        raise HTTPException(status_code=429, detail="Too many requests. Please wait a moment before trying again.")
 
-    # ── 3. Save lead to MongoDB ───────────────────────────────────────────────
+    # 3. Save to MongoDB
     lead_doc = {
         "id": str(uuid.uuid4()),
         "name": contact.name,
@@ -140,9 +119,9 @@ async def submit_contact_form(contact: ContactRequest, request: Request):
     await db.leads.insert_one(lead_doc)
     logger.info(f"Lead saved to DB: id={lead_doc['id']} gate={contact.gate_type} email={contact.email}")
 
-    # ── 4. Send email via SMTP ────────────────────────────────────────────────
+    # 4. Send email
     try:
-        smtp_host = os.environ.get('SMTP_HOST', 'smtp.mail.ovh.net')
+        smtp_host = os.environ.get('SMTP_HOST', 'smtp-relay.brevo.com')
         smtp_port = int(os.environ.get('SMTP_PORT', 587))
         smtp_user = os.environ.get('SMTP_USER')
         smtp_pass = os.environ.get('SMTP_PASS')
@@ -151,15 +130,13 @@ async def submit_contact_form(contact: ContactRequest, request: Request):
 
         if not smtp_user or not smtp_pass:
             logger.error("SMTP credentials not configured")
-            # Lead is already saved in DB — don't fail the whole request
             return ContactResponse(success=True, message="Your request has been received. We will contact you shortly.")
 
-        # Gate label for subject line
         gate_labels = {
-            "discreet":    "Discreet Gate",
-            "exploratory": "Exploratory Gate",
-            "urgent":      "Urgent Gate",
-            "postcrisis":  "Post-Crisis Gate",
+            "discreet":     "Discreet Gate",
+            "exploratory":  "Exploratory Gate",
+            "urgent":       "Urgent Gate",
+            "postcrisis":   "Post-Crisis Gate",
             "introduction": "Direct Introduction",
         }
         gate_label = gate_labels.get(contact.gate_type or "introduction", contact.gate_type or "Introduction")
@@ -183,12 +160,11 @@ Preferred Contact Method: {contact.preferred_contact}
 This message was sent via the Industrial Decision Interface contact form.
         """
 
-        # Gate badge color for the email header
         gate_colors = {
-            "discreet":    "#d9a041",
-            "exploratory": "#5f8fa0",
-            "urgent":      "#c45454",
-            "postcrisis":  "#5fa05f",
+            "discreet":     "#d9a041",
+            "exploratory":  "#5f8fa0",
+            "urgent":       "#c45454",
+            "postcrisis":   "#5fa05f",
             "introduction": "#207BFF",
         }
         gate_color = gate_colors.get(contact.gate_type or "introduction", "#207BFF")
@@ -253,16 +229,15 @@ This message was sent via the Industrial Decision Interface contact form.
         message.attach(MIMEText(text_content, "plain"))
         message.attach(MIMEText(html_content, "html"))
 
-await aiosmtplib.send(
-    message,
-    hostname=smtp_host,
-    port=smtp_port,
-    username=smtp_user,
-    password=smtp_pass,
-    start_tls=True
-)
+        await aiosmtplib.send(
+            message,
+            hostname=smtp_host,
+            port=smtp_port,
+            username=smtp_user,
+            password=smtp_pass,
+            start_tls=True
+        )
 
-        # Mark email as sent in DB
         await db.leads.update_one(
             {"id": lead_doc["id"]},
             {"$set": {"email_sent": True}}
@@ -270,7 +245,6 @@ await aiosmtplib.send(
         logger.info(f"Email sent successfully for lead id={lead_doc['id']}")
 
     except aiosmtplib.SMTPException as e:
-        # Lead saved, email failed — log but don't crash
         logger.error(f"SMTP error for lead id={lead_doc['id']}: {str(e)}")
 
     except Exception as e:
@@ -278,8 +252,6 @@ await aiosmtplib.send(
 
     return ContactResponse(success=True, message="Your request has been received. We will contact you shortly.")
 
-
-# ── App setup ─────────────────────────────────────────────────────────────────
 
 app.include_router(api_router)
 
@@ -292,5 +264,7 @@ app.add_middleware(
 )
 
 @app.on_event("shutdown")
+async def shutdown_db_client():
+    client.close()
 async def shutdown_db_client():
     client.close()
