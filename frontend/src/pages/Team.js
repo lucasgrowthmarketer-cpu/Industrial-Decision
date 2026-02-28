@@ -6,7 +6,7 @@ import { ChevronDown, ChevronUp, Target, Lightbulb, Award } from 'lucide-react';
 const teamMembers = [
   {
     id: 'lucas',
-    name: 'Lucas Ansel',
+    name: 'Lucas A.',
     role: 'Founder & Strategic Architect',
     photo: 'https://i.ibb.co/N6Td5161/Untitled-design-5.png',
     description: 'Specializes in digital strategy applied to industrial contexts. Lucas architects web ecosystems that function as decision support systems, not marketing tools. His approach combines deep understanding of industrial decision-making with modern digital infrastructure.',
@@ -16,8 +16,8 @@ const teamMembers = [
   },
   {
     id: 'ayoub',
-    name: 'Ayoub Bouzalmad',
-    role: 'Technical Implementation & Data Systems',
+    name: 'Ayoub B.',
+    role: 'Chief Technology Officer',
     photo: 'https://i.ibb.co/gZS47BmH/Untitled-design-6.png',
     description: 'Brings technical depth to industrial digital projects. Ayoub ensures that strategic concepts translate into robust, scalable implementations. His focus is on data integrity, system reliability, and technical excellence.',
     decisionScope: 'Technical architecture, data systems, implementation quality, system integration.',
@@ -26,7 +26,7 @@ const teamMembers = [
   },
   {
     id: 'david',
-    name: 'David Ansel',
+    name: 'David A.',
     role: 'Industrial Operations & Strategic Advisory',
     photo: 'https://i.ibb.co/DDKhbt2R/Untitled-design-7.png',
     description: 'Decades of experience in industrial operations provide the foundation for strategic credibility. David bridges the gap between digital capabilities and real-world industrial constraints, ensuring solutions are grounded in operational reality.',
