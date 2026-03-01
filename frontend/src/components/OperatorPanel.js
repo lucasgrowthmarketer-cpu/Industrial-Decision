@@ -35,7 +35,7 @@ const OperatorPanel = ({ className }) => {
         <p className="operator-title">Chief Technology Officer</p>
         
         <div className="operator-contact">
-          <a href="https://www.linkedin.com/in/ayoub-bouzalmad/" className="contact-item" data-testid="operator2-linkedin-link" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/in/ayoub-bouzalmad-ba17a8139/" className="contact-item" data-testid="operator2-linkedin-link" target="_blank" rel="noopener noreferrer">
             <Linkedin size={15} />
             <span>{t('operator.linkedin')}</span>
           </a>
