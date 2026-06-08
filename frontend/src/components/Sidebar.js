@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import logo from '../assets/logo.png';
 import { Activity, Database, Target, FileText, GitBranch, Shield, DoorOpen, BookOpen, Layers, Globe, Zap, Users } from 'lucide-react';
 
 const Sidebar = () => {
@@ -32,7 +33,7 @@ const Sidebar = () => {
     <nav className="sidebar" data-testid="main-sidebar">
       <div className="sidebar-header">
         <img 
-          src="https://i.ibb.co/wNCQpWYW/Image-26-02-2026-a-21-05.jpg" 
+          src={logo} 
           alt="Industrial Decision" 
           className="sidebar-logo"
           data-testid="sidebar-logo"
